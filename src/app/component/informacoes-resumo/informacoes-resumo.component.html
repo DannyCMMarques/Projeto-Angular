@@ -1,0 +1,46 @@
+<div>
+  <div class="flex items-center space-x-2 mb-2">
+    <div *ngIf="icon" class="w-8 h-8 bg-indigo-200 text-indigo-900 rounded-full flex items-center justify-center">
+      {{ icon }}
+    </div>
+
+    <span class="text-md font-medium text-indigo-900">{{ titulo }}</span>
+  </div>
+
+  <div *ngIf="pautaTitulo" class="flex items-center gap-2 mt-2">
+    <span class="material-symbols-outlined text-black mt-[2px]">
+      calendar_clock
+    </span>
+    <p class="text-sm text-gray-600">
+      <span class="font-bold">Pauta:</span> {{ pautaTitulo }}
+    </p>
+  </div>
+
+  <p *ngIf="descricao" class="text-sm sm:text-md break-words text-gray-600 mt-1 ml-6">
+    <span class="font-bold">Descrição:</span> {{ descricao }}
+  </p>
+
+  <div *ngIf="duracao" class="flex items-center gap-2 mt-2">
+    <span class="material-symbols-outlined text-black">
+      alarm
+    </span>
+    <p class="text-sm text-gray-600">
+      <span class="font-bold">Duração:</span> {{ duracao }} minutos
+    </p>
+  </div>
+
+  <div *ngIf="horarioInicio" class="flex items-start gap-2 mt-2">
+    <span class="material-symbols-outlined text-black mt-[2px]">
+      calendar_clock
+    </span>
+    <p class="text-sm text-gray-600">
+      <span class="font-bold text-gray-700">Início:</span>
+      <span> {{ horarioInicio }} </span>
+      <span *ngIf="horarioFim">
+        -
+        <span class="font-bold text-gray-700">Fim:</span>
+        <span> {{ horarioFim }} </span>
+      </span>
+    </p>
+  </div>
+</div>
