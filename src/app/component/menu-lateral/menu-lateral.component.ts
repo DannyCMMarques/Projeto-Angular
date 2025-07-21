@@ -9,6 +9,7 @@ import menuContentItens from 'src/utils/content/menuContent';
   styleUrls: ['./menu-lateral.component.css'],
 })
 export class MenuLateralComponent {
+
   constructor(private router: Router) {}
 
   private readonly MOBILE_BREAKPOINT = 768;
@@ -44,6 +45,7 @@ export class MenuLateralComponent {
     }));
     this.menu = updated;
     this.router.navigate([this.menu[index].link]);
+
   }
 
   ngOnInit(): void {

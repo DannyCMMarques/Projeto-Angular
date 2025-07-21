@@ -5,14 +5,14 @@ const menuContentItens: MenuItem[] = [
     id: 2,
     label: "Pautas",
     link: "/",
-    icon: "fa fa-address-boo",
+    icon: "article",
     active: false,
   },
   {
     id: 3,
     label: "Sessões",
     link: "/sessao",
-    icon: "fa fa-gavel",
+    icon: "gavel",
     active: false,
   }
 ];
