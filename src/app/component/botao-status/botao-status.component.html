@@ -1,0 +1,28 @@
+<div class="mt-6 flex flex-col gap-2">
+  <button
+    (click)="onClick()"
+    class="w-full px-4 py-2 text-sm font-semibold rounded-md flex items-center justify-center transition"
+    [ngClass]="cor"
+  >
+    <span class="material-icons mr-2">{{ icone }}</span>
+    {{ texto }}
+  </button>
+
+  <div class="flex justify-between items-center text-sm text-gray-600">
+    <ng-container *ngIf="mostrarVerMais && id !== undefined">
+      <app-modal-visualizar-data
+        [id]="id"
+        [isSessao]="isSessao"
+        [size]="isSessao ? 'md' : 'xl'"
+      >
+        <span class="underline hover:text-gray-800 cursor-pointer">
+          Ver Mais
+        </span>
+      </app-modal-visualizar-data>
+    </ng-container>
+
+    <span *ngIf="id !== undefined" class="text-xs text-gray-500">
+      cod.: {{ id }}
+    </span>
+  </div>
+</div>
