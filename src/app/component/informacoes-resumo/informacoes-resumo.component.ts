@@ -7,11 +7,11 @@ import { Component, Input } from '@angular/core';
 })
 export class InformacoesResumoComponent {
 
-  @Input() icon!:string;
+  @Input() icon?:string;
   @Input()  titulo!:string;
-  @Input()  descricao!:string;
-  @Input() duracao!:number;
-  @Input()  horarioInicio!:string;
-  @Input() horarioFim!:string;
-  @Input() pautaTitulo!:string;
+  @Input()  descricao?:string;
+  @Input() duracao?:number;
+  @Input()  horarioInicio?:string;
+  @Input() horarioFim?:string;
+  @Input() pautaTitulo?:string;
 }
