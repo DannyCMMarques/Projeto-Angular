@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
@@ -8,11 +9,14 @@ import { ModalVisualizarDataComponent } from './modal-visualizar-data/modal-visu
 import { BotaoStatusComponent } from './botao-status/botao-status.component';
 import { BotaoVotacaoComponent } from './botao-votacao/botao-votacao.component';
 import { CardsComponent } from './cards/cards.component';
+import { TagStatusComponent } from './tag-status/tag-status.component';
+import { TagsResumoComponent } from './tags-resumo/tags-resumo.component';
+import { CapitalizarComEspacosPipe } from '../shared/pipes/capitalizar-com-espacos.pipe';
 
 @NgModule({
-  declarations: [MenuLateralComponent, ContainerComponent, InformacoesResumoComponent, ModalComponent,BotaoStatusComponent, ModalVisualizarDataComponent, BotaoVotacaoComponent, CardsComponent, ],
+  declarations: [MenuLateralComponent, ContainerComponent, InformacoesResumoComponent, ModalComponent,BotaoStatusComponent, ModalVisualizarDataComponent, BotaoVotacaoComponent, CardsComponent,TagStatusComponent,TagsResumoComponent,CapitalizarComEspacosPipe ],
   imports: [CommonModule,
 ],
-  exports: [MenuLateralComponent,ContainerComponent,InformacoesResumoComponent,BotaoStatusComponent,ModalComponent,ModalVisualizarDataComponent],
+  exports: [MenuLateralComponent,ContainerComponent,InformacoesResumoComponent,BotaoStatusComponent,ModalComponent,ModalVisualizarDataComponent,BotaoVotacaoComponent,CardsComponent,TagStatusComponent,TagsResumoComponent,CapitalizarComEspacosPipe],
 })
 export class SharedComponentModule {}

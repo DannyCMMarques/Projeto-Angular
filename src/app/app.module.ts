@@ -12,6 +12,7 @@ import { SessoesComponent } from './pages/sessoes/sessoes.component';
     AppComponent,
     PautasComponent,
     SessoesComponent,
+  
   ],
   imports: [
     BrowserModule,
