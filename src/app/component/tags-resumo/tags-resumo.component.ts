@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Status } from 'src/interfaces/Status';
-import { corTags } from 'src/utils/helper/corTags/corTags';
+import { Status } from 'src/app/interfaces/Status';
+import { corTags } from 'src/app/utils/helper/corTags/corTags';
 
 @Component({
   selector: 'app-tags-resumo',

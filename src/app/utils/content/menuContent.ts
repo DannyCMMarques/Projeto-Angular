@@ -1,4 +1,4 @@
-import { MenuItem } from "src/interfaces/menuContentInterface";
+import { MenuItem } from "src/app/interfaces/menuContentInterface";
 
 const menuContentItens: MenuItem[] = [
   {
