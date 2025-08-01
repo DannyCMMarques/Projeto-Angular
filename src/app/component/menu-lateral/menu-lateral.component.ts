@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuItem } from 'src/interfaces/menuContentInterface';
+import { MenuItem } from 'src/app/interfaces/menuContentInterface';
 import menuContentItens from 'src/utils/content/menuContent';
 
 @Component({

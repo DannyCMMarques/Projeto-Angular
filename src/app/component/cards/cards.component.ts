@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Status } from 'src/interfaces/Status';
+import { Status } from 'src/app/interfaces/Status';
 import { StatusPauta } from 'src/utils/enums/StatusPauta';
 import { StatusSessao } from 'src/utils/enums/StatusSessao';
 

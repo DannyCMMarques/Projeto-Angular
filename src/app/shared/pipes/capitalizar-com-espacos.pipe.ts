@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Status } from 'src/interfaces/Status';
+import { Status } from 'src/app/interfaces/Status';
 
 @Pipe({
   name: 'capitalizarComEspacos'

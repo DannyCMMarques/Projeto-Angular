@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 @Component({
   selector: 'app-pautas',
   templateUrl: './pautas.component.html',
@@ -7,4 +6,8 @@ import { Component } from '@angular/core';
 })
 export class PautasComponent {
 
+
+
+
 }
+
