@@ -17,8 +17,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PautasComponent,
     SessoesComponent,
     PautasContainerComponent,
-    ModalComponent,
-
   ],
   imports: [
     BrowserModule,
