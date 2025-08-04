@@ -1,8 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import {
-  TAMANHO_CLASSE_MODAL,
-  TamanhoModal,
-} from '../../../utils/constants/tamanhoClasseModal';
+import { TAMANHO_CLASSE_MODAL, TamanhoModal } from 'src/app/utils/constants/tamanhoClasseModal';
 
 @Component({
   selector: 'app-modal',

@@ -25,19 +25,24 @@ export class PautasService {
 
 buscarPautas(
   params:{
-  page: number,
-    size: number,
-    sortBy: string,
-    direction: 'asc' | 'desc'
+  pagina: number,
+    tamanhoPagina: number,
+    sortBy?: string,
+    direction?: 'asc' | 'desc'
     titulo?: string,
     status?: string,
   }
 ){
 const queryParams = new HttpParams()
-.set('page', params.page.toString())
-.set('size', params.size.toString())
-.set('sortBy', params.sortBy)
-.set('direction', params.direction);
+.set('pagina', params.pagina.toString())
+.set('tamanhoPagina', params.tamanhoPagina.toString())
+
+if(params.sortBy) {
+  queryParams.set('sortBy', params.sortBy);
+}
+if (params.direction) {
+  queryParams.set('direction', params.direction);
+}
 if (params.titulo) {
   queryParams.set('titulo', params.titulo);
 }
@@ -53,6 +58,7 @@ return this.http.get<{ content: PautaResponseDTO[], totalElements: number, total
   ) {
     return this.http.put<PautaResponseDTO>(`${this.url}/${id}`, pauta);
   }
+
   excluirPauta(id: number) {
     return this.http.delete<void>(`${this.url}/${id}`);
   }

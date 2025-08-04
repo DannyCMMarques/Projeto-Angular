@@ -1,14 +1,71 @@
-<app-container>
-  <main class="sm:px-0 lg:px-8 py-8 min-h-screen">
-    <h1 class="text-2xl font-bold mb-4">Pautas</h1>
+  <main className="sm:px-0 lg:px-8 py-8 min-h-screen">
 
-    <!-- <ng-container *ngFor="let pauta of pautas">
-      <app-cards
-        [pautaTitulo]="pauta.titulo"
-        [descricao]="pauta.descricao"
-        [id]="pauta.id"
-        [status]="pauta.status"
-      ></app-cards>
-    </ng-container> -->
-  </main>
-</app-container>
+      <!-- {modal?.tipo === 'resultado' && modal.id != null && sessaoDaPauta && (
+        <Modal onFechar={fecharModal} tamanho="xl">
+          <VisualizarPauta id={modal.id} sessaoDaPauta={sessaoDaPauta} />
+        </Modal>
+      )}
+
+      {modal?.tipo === 'formulario' && (
+        <Modal onFechar={fecharModal} tamanho="md">
+          <FormularioPauta
+            id={modal.id}
+            handleClose={fecharModal}
+            onSucesso={() => {
+              exibirPautas(pagina);
+              fecharModal();
+            }}
+          />
+        </Modal>
+      )} -->
+
+      <section className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Pautas de Votação</h1>
+          <p className="text-sm text-gray-500">Gerencie as pautas do sistema de votação</p>
+        </div>
+
+        <button
+          (click)="abrirFormulario()"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg shadow hover:bg-indigo-700 transition"
+        >
+<span class="material-symbols-outlined">
+add_circle
+</span>          Nova Pauta
+        </button>
+      </section>
+
+      <app-container>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {pautas.map((pauta) => (
+              <Cards
+                key={pauta.id}
+                pautaTitulo={pauta.titulo}
+                descricao={handleResumo(pauta.descricao)}
+                icon={<IoNewspaper />}
+                status={pauta.status}
+                id={pauta.id}
+                onEditar={() => abrirFormulario(pauta.id)}
+                onExcluir={onDelete}
+                onVerResultados={() => {
+                  obterIdSessaoPorPauta(pauta.id).then(() => abrirResultado(pauta.id));
+                }}
+                onParticiparSessao={() => navegarParaSessao(pauta.id)}
+              />
+            ))}
+          </div>
+        )}
+      </app-container>
+
+      <div className="mt-10">
+        <Paginador
+          paginaAtual={pagina}
+          totalPaginas={totalPages}
+          totalItens={totalItens}
+          aoMudarPagina={setPagina}
+        />
+      </div>
+    </main>
