@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'src/app/interfaces/menuContentInterface';
-import menuContentItens from 'src/utils/content/menuContent';
+import menuContentItens from 'src/app/utils/content/menuContent';
 
 @Component({
   selector: 'app-menu-lateral',

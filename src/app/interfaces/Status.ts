@@ -1,7 +1,7 @@
-import { StatusPauta } from "src/utils/enums/StatusPauta";
-import { StatusSessao } from "src/utils/enums/StatusSessao";
+import { StatusPauta, StatusPautaType } from "../utils/enums/StatusPauta";
+import { StatusSessao } from "../utils/enums/StatusSessao";
 
-export type Status = StatusSessao | StatusPauta;
+export type Status = StatusSessao | StatusPautaType;
 
 export interface StatusInfo {
   cor: string;

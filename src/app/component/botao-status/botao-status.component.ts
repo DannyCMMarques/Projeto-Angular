@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { BotaoCorHelper } from 'src/utils/helper/botao-status.helper/getCorBotao';
-import { BotaoIconeHelper } from 'src/utils/helper/botao-status.helper/getIconeBotao';
-import { BotaoTextoHelper } from 'src/utils/helper/botao-status.helper/getTextoBotao';
+import { BotaoCorHelper } from 'src/app/utils/helper/botao-status.helper/getCorBotao';
+import { BotaoIconeHelper } from 'src/app/utils/helper/botao-status.helper/getIconeBotao';
+import { BotaoTextoHelper } from 'src/app/utils/helper/botao-status.helper/getTextoBotao';
 
 @Component({
   selector: 'app-botao-status',

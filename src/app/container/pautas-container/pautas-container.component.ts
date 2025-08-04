@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
 import { PautaResponseDTO } from 'src/app/interfaces/interfacePauta';
+import { ModalContainerInterface } from 'src/app/interfaces/modalContainerInterface';
 import { PautasService } from 'src/app/services/pautas.service';
-import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-pautas-container',
@@ -19,6 +20,24 @@ export class PautasContainerComponent {
   public pautaEncontradaPorId: PautaResponseDTO | null = null;
   public isLoading: boolean = false;
   private currentUrl: string = '';
+
+  modal: ModalContainerInterface | null = null;
+
+abrirFormulario(id?: number) {
+  this.modal = { tipo: 'formulario', id: id ?? undefined };
+}
+
+abrirResultado(id: number) {
+  this.modal = { tipo: 'resultado', id };
+}
+
+fecharModal() {
+  this.modal = null;
+}
+
+// onSucessoFormulario() {
+//   this.exibirPautas(this.pagina);
+// }
   constructor(
     private pautasService: PautasService,
     private toastr: ToastrService,
