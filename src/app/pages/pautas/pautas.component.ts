@@ -7,18 +7,18 @@ import { PautaResponseDTO } from 'src/app/interfaces/interfacePauta';
 })
 export class PautasComponent {
 
-  @Input() abrirFormulario?: (id?: number) => void;
+  @Output() abrirFormulario = new EventEmitter();
   @Input() isLoading: boolean = true;
   @Input() pautas: PautaResponseDTO[] = [];
-@Input() deletarPautaFn: (id: number) => void = () => {};
+  @Output() deletarPautaFn: EventEmitter<number> = new EventEmitter<number>();
   @Input() abrirResultado!: (id: number) => void;
   @Input() navegarParaSessao!: (id: number) => void;
   constructor() { }
 
 
-public gerarCallbackExcluir(id: number): () => void {
-  const fn = this.deletarPautaFn ?? (() => {});
-  return () => fn(id);
-}
+  abrirFormularioPauta(): void {
+    this.abrirFormulario.emit();
+  }
+
 }
 

@@ -1,17 +1,20 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
+import { TagStatusComponent } from 'src/app/component/tag-status/tag-status.component';
 import { PautaResponseDTO } from 'src/app/interfaces/interfacePauta';
 import { ModalContainerInterface } from 'src/app/interfaces/modalContainerInterface';
 import { PautasService } from 'src/app/services/pautas.service';
 
+@UntilDestroy()
 @Component({
   selector: 'app-pautas-container',
   templateUrl: './pautas-container.component.html',
   styleUrls: ['./pautas-container.component.css'],
 })
-export class PautasContainerComponent {
+export class PautasContainerComponent implements OnInit {
   public pagina: number = 1;
   public totalPaginas: number = 0;
   public totalElementos: number = 0;
@@ -20,10 +23,29 @@ export class PautasContainerComponent {
   public pautaEncontradaPorId: PautaResponseDTO | null = null;
   public isLoading: boolean = false;
   private currentUrl: string = '';
+  public showModal: boolean = false;
 
   modal: ModalContainerInterface | null = null;
+//embaixo
 
-abrirFormulario(id?: number) {
+
+// onSucessoFormulario() {
+//   this.exibirPautas(this.pagina);
+// }
+
+
+  constructor(
+    private pautasService: PautasService,
+    private toastr: ToastrService,
+    public route: ActivatedRoute,
+
+  ) {}
+
+
+  ngOnInit(): void {
+    this.exibirPautas();
+  }
+  abrirFormulario(id?: number) {
   this.modal = { tipo: 'formulario', id: id ?? undefined };
 }
 
@@ -34,23 +56,6 @@ abrirResultado(id: number) {
 fecharModal() {
   this.modal = null;
 }
-
-// onSucessoFormulario() {
-//   this.exibirPautas(this.pagina);
-// }
-  constructor(
-    private pautasService: PautasService,
-    private toastr: ToastrService,
-    public route: ActivatedRoute,
-    private router: Router
-  ) {
-    this.currentUrl = this.router.url;
- if (this.currentUrl === '/') {
-    this.exibirPautas();
- }
-
-  }
-
   public successMessage(msg: string): void {
     this.toastr.success(msg);
   }
@@ -64,7 +69,7 @@ fecharModal() {
         page: this.pagina,
         size: this.tamanhoPagina,
       })
-      .pipe(finalize(() => (this.isLoading = false)))
+      .pipe(untilDestroyed(this),finalize(() => (this.isLoading = false)))
       .subscribe({
         next: (response) => {
           console.log(this.tamanhoPagina)
@@ -84,7 +89,7 @@ fecharModal() {
     this.isLoading = true;
     this.pautasService
       .excluirPauta(id)
-      .pipe(finalize(() => (this.isLoading = false)))
+      .pipe(untilDestroyed(this),finalize(() => (this.isLoading = false)))
       .subscribe({
         next: () => {
           this.successMessage('Pauta excluída com sucesso!');
@@ -100,7 +105,7 @@ fecharModal() {
     this.isLoading = true;
     this.pautasService
       .buscarPautaPorId(id)
-      .pipe(finalize(() => (this.isLoading = false)))
+      .pipe(untilDestroyed(this),finalize(() => (this.isLoading = false)))
       .subscribe({
         next: (response) => {
           this.pautaEncontradaPorId = response;
@@ -111,4 +116,11 @@ fecharModal() {
         },
       });
   }
+
+
+  abrirFormularioPauta(){
+    this.showModal = !this.showModal;
+
+  }
+
 }

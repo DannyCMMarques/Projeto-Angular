@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { TAMANHO_CLASSE_MODAL, TamanhoModal } from 'src/app/utils/constants/tamanhoClasseModal';
 
 @Component({
@@ -6,9 +6,13 @@ import { TAMANHO_CLASSE_MODAL, TamanhoModal } from 'src/app/utils/constants/tama
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css'],
 })
-export class ModalComponent {
+export class ModalComponent  {
   @Input() tamanho: TamanhoModal = 'md';
+  @Input() showModal: boolean = true;
   @Output() close = new EventEmitter<void>();
+
+  @ViewChild('modalContainer', { read: ViewContainerRef })
+  public modalContainer: ViewContainerRef | undefined;
 
   get tamanhoClasse(): string {
     return TAMANHO_CLASSE_MODAL[this.tamanho];
@@ -17,4 +21,5 @@ export class ModalComponent {
   fechar(): void {
     this.close.emit();
   }
+
 }

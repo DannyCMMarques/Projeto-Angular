@@ -1,5 +1,18 @@
+
+
+
+
+
+<app-modal [showModal]="showModal" (close)="abrirFormularioPauta()" >
+
+  <p>opa</p>
+</app-modal>
+
 <app-pautas
   [isLoading]="isLoading"
   [pautas]="pautas"
-  [deletarPautaFn]="deletarPauta.bind(this)">
+  (deletarPautaFn)="deletarPauta($event)"
+  (abrirFormulario)="abrirFormularioPauta()"
+>
+
 </app-pautas>

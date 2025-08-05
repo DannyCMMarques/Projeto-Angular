@@ -7,9 +7,8 @@
         Gerencie as pautas do sistema de votação
       </p>
     </div>
-    <!-- (click)="abrirFormulario()" -->
-
     <button
+      (click)="abrirFormularioPauta()"
       class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg shadow hover:bg-indigo-700 transition">
       <span class="material-symbols-outlined"> add_circle </span> Nova Pauta
     </button>
@@ -24,7 +23,8 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <app-cards *ngFor="let pauta of pautas" [pautaTitulo]="pauta.titulo" [descricao]="pauta.descricao"
           [icon]="'newspaper'" [status]="pauta.status" [id]="pauta.id ?? undefined"
-[onExcluir]="gerarCallbackExcluir(pauta.id!)"
+          (onExcluir)="deletarPautaFn.emit(pauta.id!)"
+
           ></app-cards>
 
         <!-- (onEditar)="abrirFormulario?.(pauta?.id)"
