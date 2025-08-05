@@ -1,10 +1,5 @@
-import type {
-    SessaoIniciadaPage,
-    SessaoIniciadaResponseDTO,
-    SessaoPage,
-    SessaoRequestDTO,
-    SessaoResponseDTO,
-} from '../../app/interfaces/interfaceSessao';
+
+import { SessaoIniciadaPage, SessaoIniciadaResponseDTO, SessaoPage, SessaoRequestDTO, SessaoResponseDTO } from 'src/app/interfaces/interfaceSessao';
 import { mockPautaResultados } from './PautaMock';
 import { mockVotos } from './VotoMock';
 
