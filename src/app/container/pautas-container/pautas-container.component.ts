@@ -45,12 +45,9 @@ fecharModal() {
     private router: Router
   ) {
     this.currentUrl = this.router.url;
-
-    if (this.currentUrl.startsWith('/pautas')) {
-      this.exibirPautas();
-    }
-
-
+ if (this.currentUrl === '/') {
+    this.exibirPautas();
+ }
 
   }
 
@@ -64,12 +61,14 @@ fecharModal() {
     this.isLoading = true;
     this.pautasService
       .buscarPautas({
-        pagina: this.pagina,
-        tamanhoPagina: this.tamanhoPagina,
+        page: this.pagina,
+        size: this.tamanhoPagina,
       })
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
         next: (response) => {
+          console.log(this.tamanhoPagina)
+          console.log(response);
           this.pautas = response.content;
           this.totalElementos = response.totalElements;
           this.totalPaginas = response.totalPages;

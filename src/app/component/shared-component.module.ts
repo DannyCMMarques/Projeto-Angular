@@ -19,6 +19,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   declarations: [MenuLateralComponent, ContainerComponent, InformacoesResumoComponent, ModalComponent,BotaoStatusComponent, ModalVisualizarDataComponent, BotaoVotacaoComponent, CardsComponent,TagStatusComponent,TagsResumoComponent,CapitalizarComEspacosPipe, LoadingComponent ],
   imports: [CommonModule,NgxSpinnerModule
 ],
-  exports: [MenuLateralComponent,ContainerComponent,InformacoesResumoComponent,BotaoStatusComponent,ModalComponent,ModalVisualizarDataComponent,BotaoVotacaoComponent,CardsComponent,TagStatusComponent,TagsResumoComponent,CapitalizarComEspacosPipe],
+  exports: [MenuLateralComponent,ContainerComponent,InformacoesResumoComponent,BotaoStatusComponent,ModalComponent,ModalVisualizarDataComponent,BotaoVotacaoComponent,CardsComponent,TagStatusComponent,TagsResumoComponent,CapitalizarComEspacosPipe,LoadingComponent],
 })
 export class SharedComponentModule {}

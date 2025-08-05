@@ -11,6 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalContainerComponent } from './container/modal-container/modal-container.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,12 +26,13 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     AppRoutingModule,
     SharedComponentModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
       timeOut: 3000,
       preventDuplicates: true,
     }),
-        NgxSpinnerModule
+    NgxSpinnerModule
 
   ],
   providers: [],

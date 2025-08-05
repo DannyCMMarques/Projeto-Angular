@@ -2,8 +2,8 @@ export class BotaoTextoHelper {
    static getTexto(status: string, isSessao: boolean): string {
     if (!isSessao) {
       switch (status) {
-        case 'NÃO_VOTADA': return 'Aguardando Início';
-        case 'EM VOTAÇÃO': return 'Votar';
+        case 'NAO_VOTADA': return 'Aguardando Início';
+        case 'EM_VOTACAO': return 'Votar';
         case 'VOTADA': return 'Ver Resultados';
       }
     } else {

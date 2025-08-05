@@ -1,4 +1,4 @@
-import { StatusPauta, StatusPautaType } from "../utils/enums/StatusPauta";
+import {  StatusPautaType } from "../utils/enums/StatusPauta";
 import { StatusSessao } from "../utils/enums/StatusSessao";
 
 export type Status = StatusSessao | StatusPautaType;
