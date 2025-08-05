@@ -24,18 +24,18 @@ export class PautasService {
   }
 
 buscarPautas(
-  params:{
-  pagina: number,
-    tamanhoPagina: number,
+  params: {
+    page: number,
+    size?: number,
     sortBy?: string,
-    direction?: 'asc' | 'desc'
+    direction?: 'asc' | 'desc',
     titulo?: string,
     status?: string,
   }
 ){
-const queryParams = new HttpParams()
-.set('pagina', params.pagina.toString())
-.set('tamanhoPagina', params.tamanhoPagina.toString())
+  const queryParams = new HttpParams()
+    .set('pagina', params.page.toString())
+    .set('tamanhoPagina', params.size?.toString() ?? '100');
 
 if(params.sortBy) {
   queryParams.set('sortBy', params.sortBy);

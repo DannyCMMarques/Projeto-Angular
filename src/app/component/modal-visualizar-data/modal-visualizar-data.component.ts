@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TamanhoModal } from 'src/utils/constants/tamanhoClasseModal';
+import { TamanhoModal } from 'src/app/utils/constants/tamanhoClasseModal';
 
 @Component({
   selector: 'app-modal-visualizar-data',

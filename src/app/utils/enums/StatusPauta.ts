@@ -4,7 +4,7 @@ export const StatusPauta = {
   VOTADA: 'VOTADA',
 } as const;
 
-export type StatusPauta = (typeof StatusPauta)[keyof typeof StatusPauta];
+export type StatusPautaType = (typeof StatusPauta)[keyof typeof StatusPauta];
 
 export const ResultadoPauta = {
   APROVADO: 'APROVADO',

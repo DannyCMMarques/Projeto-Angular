@@ -1,7 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Status } from 'src/app/interfaces/Status';
-import { StatusPauta } from 'src/app/utils/enums/StatusPauta';
-import { StatusSessao } from 'src/app/utils/enums/StatusSessao';
 
 
 @Component({
@@ -9,7 +7,7 @@ import { StatusSessao } from 'src/app/utils/enums/StatusSessao';
   templateUrl: './cards.component.html',
   styleUrls: ['./cards.component.css'],
 })
-export class CardsComponent {
+export class CardsComponent implements OnChanges {
   @Input() status!: Status;
   @Input() descricao?: string;
   @Input() icon?: string;
@@ -21,26 +19,27 @@ export class CardsComponent {
   @Input() isSessao?: boolean;
   @Input() pautaTitulo?: string;
   @Input() id?: number;
+@Input() onExcluir!: () => void;
+  @Output() onEditar = new EventEmitter<number>();
+  @Output() onVerResultados = new EventEmitter<number>();
+  @Output() onIniciarSessao = new EventEmitter<number>();
+  @Output() onParticiparSessao = new EventEmitter<number>();
 
-  @Output() onEditar? = new EventEmitter<number>();
-  @Output() onExcluir? = new EventEmitter<number>();
-  @Output() onVerResultados? = new EventEmitter<number>();
-  @Output() onIniciarSessao? = new EventEmitter<number>();
-  @Output() onParticiparSessao? = new EventEmitter<number>();
+  podeEditarOuExcluir = false;
 
-  podeEditarOuExcluir =
-    this.status === StatusSessao.NAO_INICIADA || this.status === StatusPauta.NAO_VOTADA;
+  ngOnChanges() {
+    this.podeEditarOuExcluir =
+      this.status === 'NAO_VOTADA' || this.status === 'NAO_INICIADA';
+    console.log('Status:', this.status, 'Pode editar/excluir?', this.podeEditarOuExcluir);
+  }
+
 
   emitirEditar(): void {
     if (this.id != null) this.onEditar?.emit(this.id);
   }
 
-  emitirExcluir(): void {
-    if (this.id != null) this.onExcluir?.emit(this.id);
-  }
-
   emitirVerResultados(): void {
-    if (this.id != null) this.onVerResultados?.emit(this.id);
+    if (this.id != null) this.onVerResultados.emit(this.id);
   }
 
   emitirIniciarSessao(): void {
