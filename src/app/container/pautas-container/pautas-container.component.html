@@ -1,6 +1,5 @@
 <app-pautas
   [isLoading]="isLoading"
   [pautas]="pautas"
-  [deletarPautaFn]="deletarPauta"
->
+  [deletarPautaFn]="deletarPauta.bind(this)">
 </app-pautas>
