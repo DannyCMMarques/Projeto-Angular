@@ -20,7 +20,7 @@ export class CardsComponent implements OnChanges {
   @Input() pautaTitulo?: string;
   @Input() id?: number;
   @Output() onExcluir = new EventEmitter();
-  @Output() onEditar = new EventEmitter<number>();
+  @Output() onEditar = new EventEmitter();
   @Output() onVerResultados = new EventEmitter<number>();
   @Output() onIniciarSessao = new EventEmitter<number>();
   @Output() onParticiparSessao = new EventEmitter<number>();
@@ -31,25 +31,23 @@ export class CardsComponent implements OnChanges {
   if(changes['status']) {
     this.podeEditarOuExcluir =
       changes['status'].currentValue === 'NAO_VOTADA' || changes['status'].currentValue === 'NAO_INICIADA';
-     console.log(changes)
-
      }   }
   emitirExcluir(card: Event): void {
     this.onExcluir.emit(card);
   }
-   emitirEditar(): void {
-     if (this.id != null) this.onEditar?.emit(this.id);
+   emitirEditar(card:Event): void {
+      this.onEditar?.emit(card);
    }
 
    emitirVerResultados(): void {
-     if (this.id != null) this.onVerResultados.emit(this.id);
+      this.onVerResultados.emit(this.id);
    }
 
    emitirIniciarSessao(): void {
-     if (this.id != null) this.onIniciarSessao?.emit(this.id);
+      this.onIniciarSessao?.emit(this.id);
    }
 
    emitirParticiparSessao(): void {
-     if (this.id != null) this.onParticiparSessao?.emit(this.id);
+      this.onParticiparSessao?.emit(this.id);
    }
 }

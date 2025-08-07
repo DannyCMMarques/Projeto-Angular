@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
@@ -14,11 +13,45 @@ import { TagsResumoComponent } from './tags-resumo/tags-resumo.component';
 import { CapitalizarComEspacosPipe } from '../shared/pipes/capitalizar-com-espacos.pipe';
 import { LoadingComponent } from './loading/loading.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { PautaFormComponent } from './forms/pauta-form/pauta-form.component';
+import { VisualizarPautaComponent } from './visualizar-pauta/visualizar-pauta.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [MenuLateralComponent, ContainerComponent, InformacoesResumoComponent, ModalComponent,BotaoStatusComponent, ModalVisualizarDataComponent, BotaoVotacaoComponent, CardsComponent,TagStatusComponent,TagsResumoComponent,CapitalizarComEspacosPipe, LoadingComponent ],
-  imports: [CommonModule,NgxSpinnerModule
-],
-  exports: [MenuLateralComponent,ContainerComponent,InformacoesResumoComponent,BotaoStatusComponent,ModalComponent,ModalVisualizarDataComponent,BotaoVotacaoComponent,CardsComponent,TagStatusComponent,TagsResumoComponent,CapitalizarComEspacosPipe,LoadingComponent],
+  declarations: [
+    MenuLateralComponent,
+    ContainerComponent,
+    InformacoesResumoComponent,
+    ModalComponent,
+    BotaoStatusComponent,
+    ModalVisualizarDataComponent,
+    BotaoVotacaoComponent,
+    CardsComponent,
+    TagStatusComponent,
+    TagsResumoComponent,
+    CapitalizarComEspacosPipe,
+    LoadingComponent,
+    PautaFormComponent,
+    VisualizarPautaComponent,
+  ],
+  imports: [CommonModule, NgxSpinnerModule,
+    FormsModule, ReactiveFormsModule
+  ],
+  exports: [
+    MenuLateralComponent,
+    ContainerComponent,
+    InformacoesResumoComponent,
+    BotaoStatusComponent,
+    ModalComponent,
+    ModalVisualizarDataComponent,
+    BotaoVotacaoComponent,
+    CardsComponent,
+    TagStatusComponent,
+    TagsResumoComponent,
+    CapitalizarComEspacosPipe,
+    LoadingComponent,
+    PautaFormComponent,
+    VisualizarPautaComponent,
+  ],
 })
 export class SharedComponentModule {}

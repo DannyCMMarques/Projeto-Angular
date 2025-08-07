@@ -24,6 +24,15 @@
       </span>
     </button>
     <ng-content></ng-content>
+        <div  class="flex justify-end">
+      <button
+        (click)="submit()"
+      type="submit"
+        class="px-5 py-2.5 cursor-pointer font-semibold  bg-indigo-700 text-white text-sm rounded-md hover:bg-indigo-800 transition">
+
+        {{ pautaFormComponent.pautaId ? 'Salvar alterações' : 'Cadastrar' }}
+      </button>
+    </div>
   </div>
 
 </div>

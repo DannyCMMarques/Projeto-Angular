@@ -1,18 +1,22 @@
-
-
-
-
-
-<app-modal [showModal]="showModal" (close)="abrirFormularioPauta()" >
-
-  <p>opa</p>
+<app-modal [showModal]="showModalFormulario" (close)="abrirFormularioPauta($event)" (submitForm)="submitPauta($event)">
+  <ng-container *ngIf="pautaId; else novo">
+    <app-pauta-form [pautaId]="pautaId"></app-pauta-form>
+  </ng-container>
+  <ng-template #novo>
+    <app-pauta-form></app-pauta-form>
+  </ng-template>
 </app-modal>
 
-<app-pautas
-  [isLoading]="isLoading"
-  [pautas]="pautas"
-  (deletarPautaFn)="deletarPauta($event)"
-  (abrirFormulario)="abrirFormularioPauta()"
->
+<app-modal [showModal]="showModalDados" (close)="abrirDadosPauta($event)" tamanhoClasse="xl">
+  <ng-container *ngIf="sessaoDaPauta; else semSessao">
+    <app-visualizar-pauta [pauta]="pautaEncontradaPorId" [sessaoDaPauta]="sessaoDaPauta"></app-visualizar-pauta>
+  </ng-container>
+  <ng-template #semSessao>
+    <app-visualizar-pauta [pauta]="pautaEncontradaPorId"></app-visualizar-pauta>
+  </ng-template>
+</app-modal>
+
+<app-pautas [isLoading]="isLoading" [pautas]="pautas" (deletarPautaFn)="deletarPauta($event)"
+  (abrirFormulario)="abrirFormularioPauta($event)" (abrirDados)="abrirDadosPauta($event)">
 
 </app-pautas>
