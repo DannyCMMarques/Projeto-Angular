@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Status } from 'src/app/interfaces/Status';
 
 
@@ -19,34 +19,35 @@ export class CardsComponent implements OnChanges {
   @Input() isSessao?: boolean;
   @Input() pautaTitulo?: string;
   @Input() id?: number;
-@Input() onExcluir!: () => void;
-  @Output() onEditar = new EventEmitter<number>();
+  @Output() onExcluir = new EventEmitter();
+  @Output() onEditar = new EventEmitter();
   @Output() onVerResultados = new EventEmitter<number>();
   @Output() onIniciarSessao = new EventEmitter<number>();
   @Output() onParticiparSessao = new EventEmitter<number>();
 
   podeEditarOuExcluir = false;
 
-  ngOnChanges() {
+ ngOnChanges(changes: SimpleChanges): void {
+  if(changes['status']) {
     this.podeEditarOuExcluir =
-      this.status === 'NAO_VOTADA' || this.status === 'NAO_INICIADA';
-    console.log('Status:', this.status, 'Pode editar/excluir?', this.podeEditarOuExcluir);
+      changes['status'].currentValue === 'NAO_VOTADA' || changes['status'].currentValue === 'NAO_INICIADA';
+     }   }
+  emitirExcluir(card: Event): void {
+    this.onExcluir.emit(card);
   }
+   emitirEditar(card:Event): void {
+      this.onEditar?.emit(card);
+   }
 
+   emitirVerResultados(): void {
+      this.onVerResultados.emit(this.id);
+   }
 
-  emitirEditar(): void {
-    if (this.id != null) this.onEditar?.emit(this.id);
-  }
+   emitirIniciarSessao(): void {
+      this.onIniciarSessao?.emit(this.id);
+   }
 
-  emitirVerResultados(): void {
-    if (this.id != null) this.onVerResultados.emit(this.id);
-  }
-
-  emitirIniciarSessao(): void {
-    if (this.id != null) this.onIniciarSessao?.emit(this.id);
-  }
-
-  emitirParticiparSessao(): void {
-    if (this.id != null) this.onParticiparSessao?.emit(this.id);
-  }
+   emitirParticiparSessao(): void {
+      this.onParticiparSessao?.emit(this.id);
+   }
 }

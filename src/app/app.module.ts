@@ -9,7 +9,6 @@ import { SessoesComponent } from './pages/sessoes/sessoes.component';
 import { PautasContainerComponent } from './container/pautas-container/pautas-container.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ModalContainerComponent } from './container/modal-container/modal-container.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -19,7 +18,6 @@ import { HttpClientModule } from '@angular/common/http';
     PautasComponent,
     SessoesComponent,
     PautasContainerComponent,
-    ModalContainerComponent,
   ],
   imports: [
     BrowserModule,

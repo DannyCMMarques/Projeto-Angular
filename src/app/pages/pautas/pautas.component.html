@@ -1,16 +1,17 @@
 <main class="sm:px-0 lg:px-8 py-8 min-h-screen">
-
-  <section class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+  <section
+    class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2"
+  >
     <div>
       <h1 class="text-2xl font-bold text-gray-900">Pautas de Votação</h1>
       <p class="text-sm text-gray-500">
         Gerencie as pautas do sistema de votação
       </p>
     </div>
-    <!-- (click)="abrirFormulario()" -->
-
     <button
-      class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg shadow hover:bg-indigo-700 transition">
+      (click)="abrirFormularioPauta($event)"
+      class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg shadow hover:bg-indigo-700 transition"
+    >
       <span class="material-symbols-outlined"> add_circle </span> Nova Pauta
     </button>
   </section>
@@ -22,18 +23,23 @@
 
     <ng-template #conteudo>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <app-cards *ngFor="let pauta of pautas" [pautaTitulo]="pauta.titulo" [descricao]="pauta.descricao"
-          [icon]="'newspaper'" [status]="pauta.status" [id]="pauta.id ?? undefined"
-[onExcluir]="gerarCallbackExcluir(pauta.id!)"
-          ></app-cards>
+        <app-cards
+          *ngFor="let pauta of pautas"
+          [pautaTitulo]="pauta.titulo"
+          [descricao]="pauta.descricao"
+          [icon]="'newspaper'"
+          [status]="pauta.status"
+          [id]="pauta.id ?? undefined"
+          (onExcluir)="deletarPautaFn.emit(pauta.id!)"
+          (onEditar)="abrirFormularioPauta(pauta)"
+          (onVerResultados)="abrirPauta(pauta.id!)"
+        ></app-cards>
 
         <!-- (onEditar)="abrirFormulario?.(pauta?.id)"
       (onVerResultados)="abrirResultado(pauta?.id)"
       (onParticiparSessao)="navegarParaSessao(pauta?.id)" -->
-
       </div>
     </ng-template>
-
   </app-container>
 
   <!-- <div class="mt-10">

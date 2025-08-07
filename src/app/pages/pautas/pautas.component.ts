@@ -3,22 +3,23 @@ import { PautaResponseDTO } from 'src/app/interfaces/interfacePauta';
 @Component({
   selector: 'app-pautas',
   templateUrl: './pautas.component.html',
-  styleUrls: ['./pautas.component.css']
+  styleUrls: ['./pautas.component.css'],
 })
 export class PautasComponent {
-
-  @Input() abrirFormulario?: (id?: number) => void;
+  @Output() abrirFormulario = new EventEmitter();
   @Input() isLoading: boolean = true;
   @Input() pautas: PautaResponseDTO[] = [];
-@Input() deletarPautaFn: (id: number) => void = () => {};
-  @Input() abrirResultado!: (id: number) => void;
+  @Output() deletarPautaFn: EventEmitter<number> = new EventEmitter<number>();
+  @Output() abrirDados: EventEmitter<number> = new EventEmitter<number>();
   @Input() navegarParaSessao!: (id: number) => void;
-  constructor() { }
 
+  constructor() {}
 
-public gerarCallbackExcluir(id: number): () => void {
-  const fn = this.deletarPautaFn ?? (() => {});
-  return () => fn(id);
+  abrirFormularioPauta(pauta:any): void {
+      this.abrirFormulario.emit(pauta);
+  }
+
+  abrirPauta(id: number): void {
+    this.abrirDados.emit(id);
+  }
 }
-}
-
