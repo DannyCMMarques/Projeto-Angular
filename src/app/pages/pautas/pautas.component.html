@@ -33,17 +33,18 @@
           (onExcluir)="deletarPautaFn.emit(pauta.id!)"
           (onEditar)="abrirFormularioPauta(pauta)"
           (onVerResultados)="abrirPauta(pauta.id!)"
+          (onParticiparSessao)="redirecionarParaSessao(pauta.id!)"
         ></app-cards>
-
-        <!-- (onEditar)="abrirFormulario?.(pauta?.id)"
-      (onVerResultados)="abrirResultado(pauta?.id)"
-      (onParticiparSessao)="navegarParaSessao(pauta?.id)" -->
       </div>
     </ng-template>
   </app-container>
 
-  <!-- <div class="mt-10">
-    <Paginador paginaAtual="{pagina}" totalPaginas="{totalPages}" totalItens="{totalItens}"
-      aoMudarPagina="{setPagina}" />
-  </div> -->
+  <div class="mt-10">
+    <app-paginador
+      [paginaAtual]="pagina"
+      [totalPaginas]="totalPages"
+      [totalItens]="totalItens"
+      (aoMudarPagina)="mudancaPagina.emit($event)"
+    ></app-paginador>
+  </div>
 </main>
