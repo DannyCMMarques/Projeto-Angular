@@ -7,47 +7,53 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
+import { MODAL_FORM, ModalFormAdapter } from 'src/app/contratos/modal-form.types';
 import {
   TAMANHO_CLASSE_MODAL,
   TamanhoModal,
 } from 'src/app/utils/constants/tamanhoClasseModal';
-import { PautaFormComponent } from '../forms/pauta-form/pauta-form.component';
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css'],
 })
-export class ModalComponent {
+export class ModalComponent<T = any >{
   @Input() tamanho: TamanhoModal = 'md';
   @Input() showModal: boolean = true;
+  @Input() isEdit = false;
+  @Input() submitLabel = 'Cadastrar';
+  @Input() submitLabelEdit = 'Salvar alterações';
   @Output() close = new EventEmitter<void>();
   @Output() submitForm = new EventEmitter();
-  @ContentChild(PautaFormComponent) pautaFormComponent!: PautaFormComponent;
+  @Input() isForms = true;
+  // @ContentChild(PautaFormComponent) pautaFormComponent!: PautaFormComponent;
   @ViewChild('modalContainer', { read: ViewContainerRef })
   public modalContainer: ViewContainerRef | undefined;
+  @ContentChild(MODAL_FORM) modalForm?: ModalFormAdapter<T>;
 
   get tamanhoClasse(): string {
     return TAMANHO_CLASSE_MODAL[this.tamanho];
   }
 
+
   submit() {
-    if (this.pautaFormComponent) {
-      this.submitPauta();
+    const formAdapter = this.modalForm;
+    if (!formAdapter?.form) return;
+
+    formAdapter.form.markAllAsTouched?.();
+    if (formAdapter.form.valid) {
+      const value = formAdapter.getValue
+        ? formAdapter.getValue()
+        : (formAdapter.form as any).getRawValue?.() ?? formAdapter.form.value;
+
+      this.submitForm.emit({ formulario: value, id: formAdapter.id });
+      this.fechar();
     }
   }
 
-  submitPauta() {
-    if (this.pautaFormComponent && this.pautaFormComponent.formsPauta.value !== null) {
-
-      console.log('Pauta Form Component:', this.pautaFormComponent.formsPauta);
-       return this.submitForm.emit({formulario:this.pautaFormComponent.formsPauta.value, id:this.pautaFormComponent.pautaId?.id});
-    }
-
-  }
   fechar(): void {
-
-    this.pautaFormComponent.closeSubmit$.next(true);
+    this.modalForm?.onModalClose?.();
     this.close.emit();
   }
 }
