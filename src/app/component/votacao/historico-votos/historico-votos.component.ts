@@ -7,6 +7,6 @@ import { VotoResponseDTO } from 'src/app/interfaces/interfaceVotacao';
   styleUrls: ['./historico-votos.component.css']
 })
 export class HistoricoVotosComponent {
-  @Input() votos!:  VotoResponseDTO[];
+  @Input() votos!:VotoResponseDTO[];
   @Input() isConcluida: boolean = false;
 }

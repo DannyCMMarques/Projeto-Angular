@@ -94,7 +94,6 @@ export class PautasContainerComponent implements OnInit {
   }
 
   buscarPautaPorId(id: number): void {
-    this.isLoading = true;
     this.pautasService
       .buscarPautaPorId(id)
       .pipe(

@@ -19,9 +19,9 @@
       <div class="w-full lg:w-1/2 bg-white p-6 rounded-lg shadow">
        <app-estatisticas-votos [total]="sessao?.pauta?.votosTotais ?? 0" [sim]="sessao?.pauta?.votosFavor ?? 0" [nao]="sessao?.pauta?.votosContra ?? 0" />
       </div>
-      <!-- <div class="w-full lg:w-3/4">
-        <app-historico-votos votos="{{sessao.pauta.votos}}" isConcluida />
-      </div> -->
+      <div class="w-full lg:w-3/4">
+        <app-historico-votos [votos]="sessao?.votos ?? []" [isConcluida]=true ></app-historico-votos>
+      </div>
     </div>
 
 

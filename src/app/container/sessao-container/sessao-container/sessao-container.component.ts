@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
-import { SessaoFormDTO, SessaoResponseDTO } from 'src/app/interfaces/interfaceSessao';
+import { SessaoFormDTO, SessaoIniciadaResponseDTO, SessaoResponseDTO } from 'src/app/interfaces/interfaceSessao';
 import { SessoesService } from 'src/app/services/sessoes/sessoes.service';
 
 @UntilDestroy()
@@ -18,7 +18,7 @@ export class SessaoContainerComponent {
   public totalElementos: number = 0;
   public tamanhoPagina: number = 10;
   public sessoes: SessaoResponseDTO[] = [];
-  public sessaoEncontradaPorId!: SessaoResponseDTO;
+  public sessaoEncontradaPorId!: SessaoIniciadaResponseDTO;
   public isLoading: boolean = false;
   public sortBy: string = 'id';
   public sortDirection: 'asc' | 'desc' = 'desc';
@@ -90,7 +90,7 @@ export class SessaoContainerComponent {
   if (sessao && 'id' in sessao) {
     this.sessao = {
       id: sessao.id,
-      idPauta: sessao.pauta.id || 0, // tratar null
+      idPauta: sessao.pauta.id || 0,
       duracao: sessao.duracao,
       unidade: 'MIN'
     };
@@ -134,13 +134,12 @@ submitSessao(form: any) {
 }
 
 buscarSessaoPorId(id: number): void {
-  this.isLoading = true;
   this.sessaoService.buscarSessaoPorId(id).pipe(
     untilDestroyed(this),
     finalize(() => (this.isLoading = false))
   ).subscribe({
     next: (response) => {
-      this.sessaoEncontradaPorId = response;
+      this.sessaoEncontradaPorId = response as SessaoIniciadaResponseDTO;
       this.successMessage('Sessão encontrada com sucesso');
     },
     error: (error) => {

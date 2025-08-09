@@ -7,7 +7,7 @@ import { SessaoIniciadaResponseDTO, SessaoResponseDTO } from 'src/app/interfaces
   styleUrls: ['./visualizar-sessao.component.css']
 })
 export class VisualizarSessaoComponent {
-  @Input() sessao!: SessaoResponseDTO | SessaoIniciadaResponseDTO;
+  @Input() sessao!:  SessaoIniciadaResponseDTO;
 
 
   get deveMostrarGrafico(): boolean {
@@ -15,7 +15,6 @@ export class VisualizarSessaoComponent {
   }
 
   getHorarioInicio(): string | undefined {
-    console.log('sessao', this.sessao)
     return 'horarioInicio' in this.sessao && this.sessao.horarioInicio ? this.sessao.horarioInicio : undefined;
   }
 

@@ -21,6 +21,7 @@ import { VisualizarPautaComponent } from './visualizar-pauta/visualizar-pauta.co
 import { VisualizarSessaoComponent } from './visualizar-sessao/visualizar-sessao.component';
 import { EstatisticasVotosComponent } from './votacao/estatisticas-votos/estatisticas-votos.component';
 import { HistoricoVotosComponent } from './votacao/historico-votos/historico-votos.component';
+import { VotoItemComponent } from './votacao/voto-item/voto-item.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { HistoricoVotosComponent } from './votacao/historico-votos/historico-vot
     VisualizarSessaoComponent,
     EstatisticasVotosComponent,
     HistoricoVotosComponent,
+    VotoItemComponent,
   ],
   imports: [CommonModule, NgxSpinnerModule,
     FormsModule, ReactiveFormsModule

@@ -1,0 +1,15 @@
+<div class="w-full bg-white lg:p-6 sm:p-4 p-4 rounded-lg shadow">
+  <h3 class="text-lg font-semibold text-gray-800 mb-4">Histórico de Votos</h3>
+  <div class="space-y-2">
+
+    <ng-container *ngIf="votos.length == 0">
+      <p *ngIf="!isConcluida"> Ainda não há votos nessa sessão</p>
+      <p *ngIf="isConcluida"> Ninguém votou nessa sessão</p>
+    </ng-container>
+
+    <ng-container>
+      <app-voto-item *ngFor="let voto of votos" [nome]="voto.associado.nome" [voto]="voto.voto"></app-voto-item>
+    </ng-container>
+
+  </div>
+</div>
