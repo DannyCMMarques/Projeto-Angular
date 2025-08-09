@@ -36,7 +36,7 @@ export class BotaoStatusComponent {
   const { status, isSessao, id } = this;
 
   switch (true) {
-    case !isSessao && status === 'EM VOTAÇÃO':
+    case !isSessao && status === 'EM_VOTACAO':
       this.participarSessao.emit(id);
       break;
 
@@ -44,11 +44,11 @@ export class BotaoStatusComponent {
       this.verResultados.emit(id);
       break;
 
-    case isSessao && status === 'NÃO INICIADA':
+    case isSessao && status === 'NAO_INICIADA':
       this.iniciarSessao.emit(id);
       break;
 
-    case isSessao && status === 'EM ANDAMENTO':
+    case isSessao && status === 'EM_ANDAMENTO':
       this.participarSessao.emit(id);
       break;
 
