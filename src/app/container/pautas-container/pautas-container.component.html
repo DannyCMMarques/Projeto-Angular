@@ -1,4 +1,10 @@
-<app-modal [showModal]="showModalFormulario" (close)="abrirFormularioPauta()" (submitForm)="submitPauta($event)" [isEdit]="isPautaValid(pauta)">
+<app-modal
+  [showModal]="showModalFormulario"
+  (close)="abrirFormularioPauta()"
+  [isForms]="true"
+  (submitForm)="submitPauta($event)"
+  [isEdit]="isPautaValid(pauta)"
+>
   <ng-container *ngIf="isPautaValid(pauta); else novo">
     <app-pauta-form [pautaId]="pauta"></app-pauta-form>
   </ng-container>
@@ -7,9 +13,17 @@
   </ng-template>
 </app-modal>
 
-<app-modal [showModal]="showModalDados" (close)="abrirDadosPauta($event)" [tamanho]="'xl'">
+<app-modal
+  [showModal]="showModalDados"
+  (close)="abrirDadosPauta($event)"
+  [tamanho]="'xl'"
+  [isForms]="false"
+>
   <ng-container *ngIf="sessaoDaPauta; else semSessao">
-    <app-visualizar-pauta [pauta]="pautaEncontradaPorId" [sessaoDaPauta]="sessaoDaPauta"></app-visualizar-pauta>
+    <app-visualizar-pauta
+      [pauta]="pautaEncontradaPorId"
+      [sessaoDaPauta]="sessaoDaPauta"
+    ></app-visualizar-pauta>
   </ng-container>
   <ng-template #semSessao>
     <app-visualizar-pauta [pauta]="pautaEncontradaPorId"></app-visualizar-pauta>
@@ -26,5 +40,6 @@
   (abrirFormulario)="abrirFormularioPauta($event)"
   (abrirDados)="abrirDadosPauta($event)"
   (mudancaPagina)="onMudancaPagina($event)"
-  (navegarParaSessao)="navegarParaSessao($event)">
+  (navegarParaSessao)="navegarParaSessao($event)"
+>
 </app-pautas>

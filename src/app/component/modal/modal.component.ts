@@ -5,9 +5,12 @@ import {
   Input,
   Output,
   ViewChild,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
-import { MODAL_FORM, ModalFormAdapter } from 'src/app/contratos/modal-form.types';
+import {
+  MODAL_FORM,
+  ModalFormAdapter,
+} from 'src/app/contratos/modal-form.types';
 import {
   TAMANHO_CLASSE_MODAL,
   TamanhoModal,
@@ -18,7 +21,7 @@ import {
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css'],
 })
-export class ModalComponent<T = any >{
+export class ModalComponent<T = any> {
   @Input() tamanho: TamanhoModal = 'md';
   @Input() showModal: boolean = true;
   @Input() isEdit = false;
@@ -26,7 +29,7 @@ export class ModalComponent<T = any >{
   @Input() submitLabelEdit = 'Salvar alterações';
   @Output() close = new EventEmitter<void>();
   @Output() submitForm = new EventEmitter();
-  @Input() isForms = true;
+  @Input() isForms = false;
   // @ContentChild(PautaFormComponent) pautaFormComponent!: PautaFormComponent;
   @ViewChild('modalContainer', { read: ViewContainerRef })
   public modalContainer: ViewContainerRef | undefined;
@@ -35,7 +38,6 @@ export class ModalComponent<T = any >{
   get tamanhoClasse(): string {
     return TAMANHO_CLASSE_MODAL[this.tamanho];
   }
-
 
   submit() {
     const formAdapter = this.modalForm;

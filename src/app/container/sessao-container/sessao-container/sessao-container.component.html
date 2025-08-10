@@ -1,4 +1,10 @@
-<app-modal [showModal]="showModalFormulario" (close)="abrirFormularioSessao()" (submitForm)="submitSessao($event)" [isEdit]="sessao?.id ? true : false">
+<app-modal
+  [showModal]="showModalFormulario"
+  (close)="abrirFormularioSessao()"
+  [isForms]="true"
+  (submitForm)="submitSessao($event)"
+  [isEdit]="sessao?.id ? true : false"
+>
   <ng-container *ngIf="sessao; else novo">
     <app-sessao-form [sessao]="sessao"></app-sessao-form>
   </ng-container>
@@ -7,11 +13,17 @@
   </ng-template>
 </app-modal>
 
-<app-modal [isForms]="false" [showModal]="showModalDados" (close)="abrirDadosSessao()" [tamanho]="'xl'">
-  <ng-container >
-      <app-visualizar-sessao  [sessao]="sessaoEncontradaPorId"></app-visualizar-sessao>
+<app-modal
+  [isForms]="false"
+  [showModal]="showModalDados"
+  (close)="abrirDadosSessao()"
+  [tamanho]="'xl'"
+>
+  <ng-container>
+    <app-visualizar-sessao
+      [sessao]="sessaoEncontradaPorId"
+    ></app-visualizar-sessao>
   </ng-container>
-
 </app-modal>
 
 <app-sessoes
@@ -25,6 +37,6 @@
   (verResultados)="abrirDadosSessao($event)"
   (mudancaPagina)="onMudancaPagina($event)"
   (navegarParaSessao)="navegarParaSessao($event)"
-  (iniciarSessao)="iniciarSessao($event)">
-
+  (iniciarSessao)="iniciarSessao($event)"
+>
 </app-sessoes>

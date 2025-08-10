@@ -3,9 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
-import { PautaResponseDTO } from 'src/app/interfaces/interfacePauta';
+import {
+  PautaResponseDTO,
+  PautaResultadoDTO,
+} from 'src/app/interfaces/interfacePauta';
 import { SessaoIniciadaResponseDTO } from 'src/app/interfaces/interfaceSessao';
 import { PautasService } from 'src/app/services/pautas/pautas.service';
+import { SessoesService } from 'src/app/services/sessoes/sessoes.service';
 
 @UntilDestroy()
 @Component({
@@ -19,28 +23,27 @@ export class PautasContainerComponent implements OnInit {
   public totalElementos: number = 0;
   public tamanhoPagina: number = 10;
   public pautas: PautaResponseDTO[] = [];
-  public pautaEncontradaPorId!: PautaResponseDTO;
+  public pautaEncontradaPorId!: PautaResultadoDTO;
   public isLoading: boolean = false;
   private currentUrl: string = '';
   public showModalFormulario: boolean = false;
   public showModalDados: boolean = false;
-  public pauta?: PautaResponseDTO|PointerEvent;
+  public pauta?: PautaResponseDTO | PointerEvent;
   public sessaoDaPauta: SessaoIniciadaResponseDTO | null = null;
   public sortBy: string = 'id';
   public sortDirection: 'asc' | 'desc' = 'desc';
 
-
   constructor(
     private pautasService: PautasService,
+    private sessoesService: SessoesService,
     private toastr: ToastrService,
     public route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.exibirPautas();
   }
-
 
   public successMessage(msg: string): void {
     this.toastr.success(msg);
@@ -56,7 +59,7 @@ export class PautasContainerComponent implements OnInit {
         page: this.pagina,
         size: this.tamanhoPagina,
         sortBy: this.sortBy,
-        direction: this.sortDirection
+        direction: this.sortDirection,
       })
       .pipe(
         untilDestroyed(this),
@@ -93,7 +96,7 @@ export class PautasContainerComponent implements OnInit {
       });
   }
 
-  buscarPautaPorId(id: number): void {
+  private buscarPautaPorId(id: number): void {
     this.pautasService
       .buscarPautaPorId(id)
       .pipe(
@@ -102,7 +105,7 @@ export class PautasContainerComponent implements OnInit {
       )
       .subscribe({
         next: (response) => {
-          this.pautaEncontradaPorId = response;
+          this.pautaEncontradaPorId = response as PautaResultadoDTO;
           this.successMessage('Pauta encontrada com sucesso!');
         },
         error: (error) => {
@@ -113,7 +116,7 @@ export class PautasContainerComponent implements OnInit {
       });
   }
 
-  abrirFormularioPauta(pauta?: PautaResponseDTO|PointerEvent): void {
+  public abrirFormularioPauta(pauta?: PautaResponseDTO | PointerEvent): void {
     this.showModalFormulario = !this.showModalFormulario;
     if (this.isPautaValid(pauta)) {
       this.pauta = pauta;
@@ -122,34 +125,69 @@ export class PautasContainerComponent implements OnInit {
     }
   }
 
-  abrirDadosPauta(id: any): void {
+  public abrirDadosPauta(id: any): void {
     if (id) {
       this.buscarPautaPorId(id);
-      if (this.pautaEncontradaPorId) {
+      this.buscarSessaoDaPauta(id);
+      if (this.pautaEncontradaPorId && this.sessaoDaPauta) {
         this.showModalDados = true;
       }
     } else {
       this.showModalDados = false;
     }
   }
-  submitPauta(form: any) {
+  public submitPauta(form: any) {
     this.isLoading = true;
 
     const submitRequest$ = this.getSubmitRequest(form);
 
-    submitRequest$.pipe(
-      untilDestroyed(this),
-      finalize(() => (this.isLoading = false))
-    ).subscribe({
-      next: () => {
-        this.successMessage(form.id ? 'Pauta editada com sucesso!' : 'Pauta cadastrada com sucesso!');
-        this.exibirPautas();
-        this.showModalFormulario = false;
-      },
-      error: (error) => {
-        this.errorMessage(error?.error?.message || 'Erro ao processar pauta:');
-      },
-    });
+    submitRequest$
+      .pipe(
+        untilDestroyed(this),
+        finalize(() => (this.isLoading = false))
+      )
+      .subscribe({
+        next: () => {
+          this.successMessage(
+            form.id
+              ? 'Pauta editada com sucesso!'
+              : 'Pauta cadastrada com sucesso!'
+          );
+          this.exibirPautas();
+          this.showModalFormulario = false;
+        },
+        error: (error) => {
+          this.errorMessage(
+            error?.error?.message || 'Erro ao processar pauta:'
+          );
+        },
+      });
+  }
+
+  private buscarSessaoDaPauta(idDaPauta: number) {
+    this.sessoesService
+      .buscarSessoes({
+        page: 0,
+        size: 1,
+        sortBy: 'id',
+        direction: 'desc',
+        pautaId: idDaPauta,
+      })
+      .pipe(
+        untilDestroyed(this),
+        finalize(() => (this.isLoading = false))
+      )
+      .subscribe({
+        next: (response) => {
+          this.sessaoDaPauta = response.content[0] as SessaoIniciadaResponseDTO;
+          this.successMessage('Sessão encontrada com sucesso!');
+        },
+        error: (error) => {
+          this.errorMessage(
+            error?.error?.message || 'Erro ao buscar sessão da pauta:'
+          );
+        },
+      });
   }
 
   private getSubmitRequest(form: any) {

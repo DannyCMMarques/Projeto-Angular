@@ -10,15 +10,12 @@
 
   <div class="flex justify-between items-center text-sm text-gray-600">
     <ng-container *ngIf="mostrarVerMais && id !== undefined">
-      <app-modal-visualizar-data
-        [id]="id"
-        [isSessao]="isSessao"
-        [size]="isSessao ? 'md' : 'xl'"
+      <span
+        class="underline hover:text-gray-800 cursor-pointer"
+        (click)="verResultados.emit(id)"
       >
-        <span class="underline hover:text-gray-800 cursor-pointer">
-          Ver Mais
-        </span>
-      </app-modal-visualizar-data>
+        Ver Mais
+      </span>
     </ng-container>
 
     <span *ngIf="id !== undefined" class="text-xs text-gray-500">

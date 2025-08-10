@@ -19,6 +19,7 @@ import { TagStatusComponent } from './tag-status/tag-status.component';
 import { TagsResumoComponent } from './tags-resumo/tags-resumo.component';
 import { VisualizarPautaComponent } from './visualizar-pauta/visualizar-pauta.component';
 import { VisualizarSessaoComponent } from './visualizar-sessao/visualizar-sessao.component';
+import { CabecalhoSessaoComponent } from './votacao/cabecalho-sessao/cabecalho-sessao.component';
 import { EstatisticasVotosComponent } from './votacao/estatisticas-votos/estatisticas-votos.component';
 import { HistoricoVotosComponent } from './votacao/historico-votos/historico-votos.component';
 import { VotoItemComponent } from './votacao/voto-item/voto-item.component';
@@ -45,10 +46,9 @@ import { VotoItemComponent } from './votacao/voto-item/voto-item.component';
     EstatisticasVotosComponent,
     HistoricoVotosComponent,
     VotoItemComponent,
+    CabecalhoSessaoComponent,
   ],
-  imports: [CommonModule, NgxSpinnerModule,
-    FormsModule, ReactiveFormsModule
-  ],
+  imports: [CommonModule, NgxSpinnerModule, FormsModule, ReactiveFormsModule],
   exports: [
     MenuLateralComponent,
     ContainerComponent,
@@ -69,6 +69,7 @@ import { VotoItemComponent } from './votacao/voto-item/voto-item.component';
     VisualizarSessaoComponent,
     EstatisticasVotosComponent,
     HistoricoVotosComponent,
+    CabecalhoSessaoComponent,
   ],
 })
 export class SharedComponentModule {}
