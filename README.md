@@ -213,7 +213,7 @@ docker-compose up
 
 ```bash
 git clone https://github.com/DannyCMMarques/Projeto-Angular.git
-cd desafio-votacao
+cd Projeto-Angular
 npm install
 ng serve
 ```
@@ -243,31 +243,5 @@ ng test --code-coverage
 ```bash
 ng test --watch
 ```
-
----
-
-## 🎓 Aprendizados Principais
-
-### **Conceitos Dominados:**
-
-- ✅ Arquitetura de componentes Angular
-- ✅ Comunicação entre componentes
-- ✅ Formulários reativos e validação
-- ✅ Serviços e injeção de dependências
-- ✅ Roteamento e navegação
-- ✅ HTTP e observables
-- ✅ Lifecycle hooks
-- ✅ Testes unitários
-- ✅ TypeScript avançado
-- ✅ Padrões de projeto
-
-### **Boas Práticas Aplicadas:**
-
-- ✅ Separação de responsabilidades
-- ✅ Código reutilizável
-- ✅ Tratamento de erros
-- ✅ Performance otimizada
-- ✅ Código limpo e legível
-- ✅ Testes abrangentes
 
 ---
