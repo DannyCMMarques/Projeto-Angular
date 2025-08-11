@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
-import { urls } from '../config/const/urlBase.const';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { PautaRequestDTO, PautaResponseDTO } from '../interfaces/interfacePauta';
+import { Injectable } from '@angular/core';
+import { urls } from 'src/app/config/const/urlBase.const';
+import { PautaRequestDTO, PautaResponseDTO } from 'src/app/interfaces/interfacePauta';
+
 
 @Injectable({
   providedIn: 'root'
@@ -34,15 +35,11 @@ buscarPautas(
   }
 ){
   const queryParams = new HttpParams()
-    .set('pagina', params.page.toString())
-    .set('tamanhoPagina', params.size?.toString() ?? '100');
+    .set('page', params.page.toString())
+    .set('size', params.size?.toString() ?? '10')
+    .set('sortBy', 'id')
+    .set('direction', 'desc');
 
-if(params.sortBy) {
-  queryParams.set('sortBy', params.sortBy);
-}
-if (params.direction) {
-  queryParams.set('direction', params.direction);
-}
 if (params.titulo) {
   queryParams.set('titulo', params.titulo);
 }

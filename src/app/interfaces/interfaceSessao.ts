@@ -34,3 +34,12 @@ export interface Page<T> {
 
 export type SessaoPage = Page<SessaoResponseDTO>;
 export type SessaoIniciadaPage = Page<SessaoIniciadaResponseDTO>;
+
+export interface SessaoFormDTO {
+  id?: number;
+  idPauta: number;
+  duracao: number;
+  unidade: 'MIN' | 'SEG' | 'H';
+  status?: 'NAO_INICIADA' | 'EM_ANDAMENTO' | 'FINALIZADA';
+  pauta?: PautaResultadoDTO;
+}

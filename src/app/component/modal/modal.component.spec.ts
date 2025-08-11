@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { SharedComponentModule } from '../shared-component.module';
 import { ModalComponent } from './modal.component';
 
 describe('ModalComponent', () => {
@@ -8,6 +8,7 @@ describe('ModalComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [SharedComponentModule],
       declarations: [ModalComponent]
     });
     fixture = TestBed.createComponent(ModalComponent);

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { SharedComponentModule } from '../../component/shared-component.module';
 import { PautasComponent } from './pautas.component';
 
 describe('PautasComponent', () => {
@@ -8,7 +8,8 @@ describe('PautasComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PautasComponent]
+      imports: [SharedComponentModule],
+      declarations: [PautasComponent],
     });
     fixture = TestBed.createComponent(PautasComponent);
     component = fixture.componentInstance;

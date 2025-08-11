@@ -1,36 +1,19 @@
-<!-- <div className="fixed inset-0 z-50 bg-gray-600/50 flex items-center justify-center p-4">
-  <div class="bg-white rounded-lg shadow-lg w-full max-h-screen mt-16 mb-9  overflow-y-auto p-6 relative"
-    [ngClass]="tamanhoClasse">
-    <button *ngIf="close.observers.length" className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-xl"
-      (click)="fechar()">
-      <span class="material-symbols-outlined">
-        close
-      </span>
-    </button>
-    <ng-content></ng-content>
-
-
-    <ng-template #modalContainer></ng-template>
-
-  </div>
-</div> -->
-
 <div *ngIf="showModal" class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
 
-  <div class="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full" [ngClass]="tamanhoClasse">
-    <button className="absolute top-2 left-2 text-gray-500 hover:text-gray-700 text-xl" (click)="fechar()">
+  <div class="bg-white rounded-lg shadow-lg  w-full max-h-screen mt-16 mb-9  p-6 relative"
+    [ngClass]="tamanhoClasse">
+    <button class="absolute top-1 right-2 text-gray-500 hover:text-gray-700 text-xl" (click)="fechar()">
       <span class="material-symbols-outlined">
-        close
+        cancel
       </span>
     </button>
     <ng-content></ng-content>
-        <div  class="flex justify-end">
-      <button
-        (click)="submit()"
-      type="submit"
-        class="px-5 py-2.5 cursor-pointer font-semibold  bg-indigo-700 text-white text-sm rounded-md hover:bg-indigo-800 transition">
+    <div class="flex justify-end">
+      <button (click)="submit()" type="submit"
+        class="px-5 py-2.5 cursor-pointer mt-2 font-medium  bg-indigo-700 text-white text-sm rounded-md hover:bg-indigo-800 transition"
+        *ngIf="isForms">
+        {{ isEdit ? submitLabelEdit : submitLabel }}
 
-        {{ pautaFormComponent.pautaId ? 'Salvar alterações' : 'Cadastrar' }}
       </button>
     </div>
   </div>

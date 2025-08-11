@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { SharedComponentModule } from '../../component/shared-component.module';
 import { SessoesComponent } from './sessoes.component';
 
 describe('SessoesComponent', () => {
@@ -8,7 +8,8 @@ describe('SessoesComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SessoesComponent]
+      imports: [SharedComponentModule],
+      declarations: [SessoesComponent],
     });
     fixture = TestBed.createComponent(SessoesComponent);
     component = fixture.componentInstance;

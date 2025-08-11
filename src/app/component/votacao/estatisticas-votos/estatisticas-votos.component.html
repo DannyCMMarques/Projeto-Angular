@@ -1,0 +1,36 @@
+<div class="text-sm space-y-4">
+  <div class="flex justify-between">
+    <p class="text-gray-800">Total de Votos:</p>
+    <p class="font-bold">{{ total }}</p>
+  </div>
+
+  <div>
+    <div class="flex justify-between items-center text-green-600 font-medium mb-1">
+      <div class="flex items-center gap-1">
+        <span class="material-symbols-outlined">thumb_up</span>
+        SIM
+      </div>
+      <span class="text-sm font-semibold text-green-700">
+        {{ sim }} ({{ simPct }}%)
+      </span>
+    </div>
+    <div class="w-full h-4 bg-gray-200 rounded-full overflow-hidden">
+      <div class="h-4 bg-green-500 rounded-full" [style.width.%]="simPct"></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="flex justify-between items-center text-red-600 font-medium mb-1">
+      <div class="flex items-center gap-1">
+        <span class="material-symbols-outlined">thumb_down</span>
+        NÃO
+      </div>
+      <span class="text-sm font-semibold text-red-700">
+        {{ nao }} ({{ naoPct }}%)
+      </span>
+    </div>
+    <div class="w-full h-4 bg-gray-200 rounded-full overflow-hidden">
+      <div class="h-4 bg-red-500 rounded-full" [style.width.%]="naoPct"></div>
+    </div>
+  </div>
+</div>

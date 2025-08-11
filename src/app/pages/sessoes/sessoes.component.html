@@ -1,3 +1,56 @@
-<app-container>
-<p>sessoes works!</p>
-</app-container>
+<main class="sm:px-0 lg:px-8 py-8 min-h-screen">
+  <section
+    class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2"
+  >
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">Sessões de Votação</h1>
+      <p class="text-sm text-gray-500">
+        Gerencie as sessões vinculadas às pautas
+      </p>
+    </div>
+
+    <button
+      (click)="abrirFormularioSessao($event)"
+      class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg shadow hover:bg-indigo-700 transition"
+    >
+      <span class="material-symbols-outlined"> add_circle </span>
+      Nova Sessão
+    </button>
+  </section>
+
+  <app-container>
+    <ng-container *ngIf="isLoading; else conteudo">
+      <app-loading> </app-loading>
+    </ng-container>
+    <ng-template #conteudo>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <app-cards
+          *ngFor="let sessao of sessoes"
+          [pautaTitulo]="sessao.pauta.titulo"
+          [id]="sessao.id"
+          [icon]="'how_to_vote'"
+          [status]="sessao.status"
+          [duracao]="sessao.duracao"
+          [horarioInicio]="getHorarioInicio(sessao)"
+          [horarioFim]="getHorarioFim(sessao)"
+          [isSessao]="true"
+          (onEditar)="abrirFormularioSessao(sessao)"
+          (onVerResultados)="abrirSessaoResultados(sessao)"
+          (onExcluir)="deletarSessaoFn.emit(sessao.id)"
+          (onIniciarSessao)="iniciarSessaoFn(sessao.id)"
+          (onParticiparSessao)="redirecionarParaSessao(sessao.id)"
+        >
+        </app-cards>
+      </div>
+    </ng-template>
+  </app-container>
+
+  <div class="mt-10">
+    <app-paginador
+      [paginaAtual]="pagina"
+      [totalPaginas]="totalPages"
+      [totalItens]="totalElementos"
+      (aoMudarPagina)="mudancaPagina.emit($event)"
+    />
+  </div>
+</main>

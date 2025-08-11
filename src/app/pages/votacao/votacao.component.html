@@ -1,0 +1,31 @@
+<div class="sm:px-0 lg:px-8 py-1 min-h-screen">
+  <div class="relative">
+    
+
+    <app-container cor="bg-transparent">
+      <app-cabecalho-sessao [sessao]="sessao"></app-cabecalho-sessao>
+
+      <div class="flex flex-col lg:flex-row justify-between gap-6 mt-6">
+        <div class="flex flex-col gap-6 flex-1">
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h4 class="font-semibold mb-4 text-gray-800">Seu Voto</h4>
+            <app-botao-votacao (votar)="handleVotar($event)" />
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h4 class="font-semibold mb-4 text-gray-800">Estatísticas</h4>
+            <app-estatisticas-votos
+              [sim]="sessao!.pauta.votosFavor"
+              [nao]="sessao!.pauta.votosContra"
+              [total]="sessao!.pauta.votosTotais"
+            ></app-estatisticas-votos>
+          </div>
+        </div>
+
+        <div class="lg:w-[65%] sm:w-full">
+          <app-historico-votos [votos]="sessao!.votos"></app-historico-votos>
+        </div>
+      </div>
+    </app-container>
+  </div>
+</div>
