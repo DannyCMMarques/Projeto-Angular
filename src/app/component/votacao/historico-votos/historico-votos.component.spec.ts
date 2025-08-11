@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { mockVotos } from '../../../utils/mock/VotoMock';
+import { SharedComponentModule } from '../../shared-component.module';
 import { HistoricoVotosComponent } from './historico-votos.component';
 
 describe('HistoricoVotosComponent', () => {
@@ -8,14 +9,18 @@ describe('HistoricoVotosComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HistoricoVotosComponent]
+      imports: [SharedComponentModule],
+      declarations: [HistoricoVotosComponent],
     });
     fixture = TestBed.createComponent(HistoricoVotosComponent);
     component = fixture.componentInstance;
+
+    component.votos = mockVotos;
+
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('deve ser criado', () => {
     expect(component).toBeTruthy();
   });
 });

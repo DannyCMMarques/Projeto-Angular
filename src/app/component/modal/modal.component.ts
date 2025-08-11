@@ -46,14 +46,12 @@ export class ModalComponent<T = any> {
 
     formAdapter.form.markAllAsTouched?.();
 
-    
     if (formAdapter.form.valid) {
       const value = formAdapter.getValue
         ? formAdapter.getValue()
         : (formAdapter.form as any).getRawValue?.() ?? formAdapter.form.value;
       this.submitForm.emit({ formulario: value, id: formAdapter.id });
       this.fechar();
-    } else {
     }
   }
 

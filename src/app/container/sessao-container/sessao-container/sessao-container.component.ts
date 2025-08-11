@@ -3,14 +3,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
-import { SessaoFormDTO, SessaoIniciadaResponseDTO, SessaoResponseDTO } from 'src/app/interfaces/interfaceSessao';
+import {
+  SessaoFormDTO,
+  SessaoIniciadaResponseDTO,
+  SessaoResponseDTO,
+} from 'src/app/interfaces/interfaceSessao';
 import { SessoesService } from 'src/app/services/sessoes/sessoes.service';
 
 @UntilDestroy()
 @Component({
   selector: 'app-sessao-container',
   templateUrl: './sessao-container.component.html',
-  styleUrls: ['./sessao-container.component.css']
+  styleUrls: ['./sessao-container.component.css'],
 })
 export class SessaoContainerComponent {
   public pagina: number = 1;
@@ -31,11 +35,10 @@ export class SessaoContainerComponent {
     private toastr: ToastrService,
     public route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
   ngOnInit(): void {
     this.exibirSessoes();
   }
-
 
   public successMessage(msg: string): void {
     this.toastr.success(msg);
@@ -46,12 +49,13 @@ export class SessaoContainerComponent {
 
   exibirSessoes(): void {
     this.isLoading = true;
-    this.sessaoService.buscarSessoes({
-      page: this.pagina,
-      size: this.tamanhoPagina,
-      sortBy: this.sortBy,
-      direction: this.sortDirection
-    })
+    this.sessaoService
+      .buscarSessoes({
+        page: this.pagina,
+        size: this.tamanhoPagina,
+        sortBy: this.sortBy,
+        direction: this.sortDirection,
+      })
       .pipe(
         untilDestroyed(this),
         finalize(() => (this.isLoading = false))
@@ -68,117 +72,134 @@ export class SessaoContainerComponent {
       });
   }
 
-   deletarSessao(id: number): void {
+  deletarSessao(id: number): void {
     this.isLoading = true;
-    this.sessaoService.excluirSessao(id).pipe(
-      untilDestroyed(this),
-      finalize(() => (this.isLoading = false))
-    ).subscribe({
-      next: () => {
-        this.successMessage('Sessão deletada com sucesso');
-        this.exibirSessoes();
-      },
-      error: (error) => {
-        this.errorMessage(error?.error?.message || 'Erro ao deletar sessão:');
-      },
-    });
+    this.sessaoService
+      .excluirSessao(id)
+      .pipe(
+        untilDestroyed(this),
+        finalize(() => (this.isLoading = false))
+      )
+      .subscribe({
+        next: () => {
+          this.successMessage('Sessão deletada com sucesso');
+          this.exibirSessoes();
+        },
+        error: (error) => {
+          this.errorMessage(error?.error?.message || 'Erro ao deletar sessão:');
+        },
+      });
   }
 
-
- abrirFormularioSessao(sessao?: SessaoResponseDTO|PointerEvent): void {
-  this.showModalFormulario = !this.showModalFormulario;
-  if (sessao && 'id' in sessao) {
-    this.sessao = {
-      id: sessao.id,
-      idPauta: sessao.pauta.id || 0,
-      duracao: sessao.duracao,
-      unidade: 'MIN'
-    };
-  } else {
-    this.sessao = undefined;
-  }
-}
-private cadastrarSessao$(formulario: any) {
-  return this.sessaoService.cadastrarSessao(formulario);
-}
-
-private editarSessao$(id: number, formulario: any) {
-  return this.sessaoService.atualizarSessao(id, formulario);
-}
-private getSubmitRequest(form: any) {
-  if (form.id) {
-    return this.editarSessao$(form.id, form.formulario);
-  } else {
-    return this.cadastrarSessao$(form.formulario);
-  }
-}
-
-submitSessao(form: any) {
-  this.isLoading = true;
-
-  const submitRequest$ = this.getSubmitRequest(form);
-
-  submitRequest$.pipe(
-    untilDestroyed(this),
-    finalize(() => (this.isLoading = false))
-  ).subscribe({
-    next: () => {
-      this.successMessage(form.id ? 'Sessão editada com sucesso!' : 'Sessão cadastrada com sucesso!');
-      this.exibirSessoes();
-      this.showModalFormulario = false;
-    },
-    error: (error) => {
-      this.errorMessage(error?.error?.message || 'Erro ao processar sessão:');
-    },
-  });
-}
-
-buscarSessaoPorId(id: number): void {
-  this.sessaoService.buscarSessaoPorId(id).pipe(
-    untilDestroyed(this),
-    finalize(() => (this.isLoading = false))
-  ).subscribe({
-    next: (response) => {
-      this.sessaoEncontradaPorId = response as SessaoIniciadaResponseDTO;
-    },
-    error: (error) => {
-      this.errorMessage(error?.error?.message || 'Erro ao buscar sessão por ID:');
-    },
-  });
-}
-
-abrirDadosSessao(sessao?: SessaoResponseDTO|PointerEvent): void {
-  if (sessao && 'id' in sessao) {
-    this.buscarSessaoPorId(sessao.id);
-    if (this.sessaoEncontradaPorId) {
-      this.showModalDados = true;
+  abrirFormularioSessao(sessao?: SessaoResponseDTO | PointerEvent): void {
+    this.showModalFormulario = !this.showModalFormulario;
+    if (sessao && 'id' in sessao) {
+      this.sessao = {
+        id: sessao.id,
+        idPauta: sessao.pauta.id || 0,
+        duracao: sessao.duracao,
+        unidade: 'MIN',
+      };
+    } else {
+      this.sessao = undefined;
     }
-  } else {
-    this.showModalDados = false;
   }
-}
+  private cadastrarSessao$(formulario: any) {
+    return this.sessaoService.cadastrarSessao(formulario);
+  }
 
-iniciarSessao(id: number): void {
-  this.sessaoService.iniciarSessao(id).pipe(
-    untilDestroyed(this),
-    finalize(() => (this.isLoading = false))
-  ).subscribe({
-    next: () => {
-      this.successMessage('Sessão iniciada com sucesso');
-      this.exibirSessoes();
-    },
-    error: (error) => {
-      this.errorMessage(error?.error?.message || 'Erro ao iniciar sessão:');
-    },
-  });
-}
-onMudancaPagina(novaPagina: number): void {
-  this.pagina = novaPagina;
-  this.exibirSessoes();
-}
+  private editarSessao$(id: number, formulario: any) {
+    return this.sessaoService.atualizarSessao(id, formulario);
+  }
+  private getSubmitRequest(form: any) {
+    if (form.id) {
+      return this.editarSessao$(form.id, form.formulario);
+    } else {
+      return this.cadastrarSessao$(form.formulario);
+    }
+  }
 
-navegarParaSessao(id: number): void {
-  this.router.navigate(['/sessao', id]);
-}
+  submitSessao(form: any) {
+    this.isLoading = true;
 
+    const submitRequest$ = this.getSubmitRequest(form);
+
+    submitRequest$
+      .pipe(
+        untilDestroyed(this),
+        finalize(() => (this.isLoading = false))
+      )
+      .subscribe({
+        next: () => {
+          this.successMessage(
+            form.id
+              ? 'Sessão editada com sucesso!'
+              : 'Sessão cadastrada com sucesso!'
+          );
+          this.exibirSessoes();
+          this.showModalFormulario = false;
+        },
+        error: (error) => {
+          this.errorMessage(
+            error?.error?.message || 'Erro ao processar sessão:'
+          );
+        },
+      });
+  }
+
+  buscarSessaoPorId(id: number): void {
+    this.sessaoService
+      .buscarSessaoPorId(id)
+      .pipe(
+        untilDestroyed(this),
+        finalize(() => (this.isLoading = false))
+      )
+      .subscribe({
+        next: (response) => {
+          this.sessaoEncontradaPorId = response as SessaoIniciadaResponseDTO;
+        },
+        error: (error) => {
+          this.errorMessage(
+            error?.error?.message || 'Erro ao buscar sessão por ID:'
+          );
+        },
+      });
+  }
+
+  abrirDadosSessao(sessao?: SessaoResponseDTO | PointerEvent): void {
+    if (sessao && 'id' in sessao) {
+      this.buscarSessaoPorId(sessao.id);
+      if (this.sessaoEncontradaPorId) {
+        this.showModalDados = true;
+      }
+    } else {
+      this.showModalDados = false;
+    }
+  }
+
+  iniciarSessao(id: number): void {
+    this.sessaoService
+      .iniciarSessao(id)
+      .pipe(
+        untilDestroyed(this),
+        finalize(() => (this.isLoading = false))
+      )
+      .subscribe({
+        next: () => {
+          this.successMessage('Sessão iniciada com sucesso');
+          this.exibirSessoes();
+        },
+        error: (error) => {
+          this.errorMessage(error?.error?.message || 'Erro ao iniciar sessão:');
+        },
+      });
+  }
+  onMudancaPagina(novaPagina: number): void {
+    this.pagina = novaPagina;
+    this.exibirSessoes();
+  }
+
+  navegarParaSessao(id: number): void {
+    this.router.navigate(['/sessao', id]);
+  }
 }

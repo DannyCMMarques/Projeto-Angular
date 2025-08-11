@@ -52,7 +52,7 @@ export class PautasContainerComponent implements OnInit {
     this.toastr.error(msg);
   }
 
-  private exibirPautas(): void {
+  public exibirPautas(): void {
     this.isLoading = true;
     this.pautasService
       .buscarPautas({

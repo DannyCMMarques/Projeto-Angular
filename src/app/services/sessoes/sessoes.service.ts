@@ -21,7 +21,6 @@ export class SessoesService {
   buscarSessaoPorId(id: number) {
     return this.http.get<SessaoResponseDTO>(`${this.url}/${id}`);
   }
-
   buscarSessoes(params: {
     page: number;
     size: number;
@@ -30,19 +29,20 @@ export class SessoesService {
     pautaId?: number;
     status?: string;
   }) {
-    const queryParams = new HttpParams()
+    let queryParams = new HttpParams()
       .set('page', params.page.toString())
       .set('size', params.size.toString())
       .set('sortBy', params.sortBy)
       .set('direction', params.direction);
 
-    if (params.pautaId) {
-      queryParams.set('pautaId', params.pautaId.toString());
+    if (params.pautaId !== undefined) {
+      queryParams = queryParams.set('pautaId', params.pautaId.toString());
     }
 
     if (params.status) {
-      queryParams.set('status', params.status);
+      queryParams = queryParams.set('status', params.status);
     }
+
     return this.http.get<{
       content: SessaoResponseDTO[];
       totalElements: number;

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { SharedComponentModule } from '../../component/shared-component.module';
+import { mockSessoesIniciadas } from '../../utils/mock/SessaoMock';
 import { VotacaoComponent } from './votacao.component';
 
 describe('VotacaoComponent', () => {
@@ -8,14 +9,18 @@ describe('VotacaoComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [VotacaoComponent]
+      imports: [SharedComponentModule],
+      declarations: [VotacaoComponent],
     });
     fixture = TestBed.createComponent(VotacaoComponent);
     component = fixture.componentInstance;
+
+    component.sessao = mockSessoesIniciadas[0];
+
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('deve ser criado', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ToastrService } from 'ngx-toastr';
@@ -22,7 +22,6 @@ export class VotacaoContainerComponent implements OnInit {
   public idUsuario: number | null = this.handleGetIdUsuario();
   public idSessao!: number;
   public mostrarCadastro: boolean = false;
-  public horarioEncerramento = this.sessaoEncontradaPorId.horarioFim;
   constructor(
     private sessaoService: SessoesService,
     private votacaoService: VotacaoService,
@@ -30,7 +29,7 @@ export class VotacaoContainerComponent implements OnInit {
     private toastr: ToastrService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -44,11 +43,7 @@ export class VotacaoContainerComponent implements OnInit {
     });
   }
 
-
-
   handleAssociadoForm(form: any) {
-
-
     const dadosAssociado = form.formulario || form;
 
     this.buscarAssociadoPorCpf(dadosAssociado.cpf);
@@ -67,7 +62,8 @@ export class VotacaoContainerComponent implements OnInit {
             this.isOpenModal = false;
             this.buscarSessaoPorId(this.idSessao);
           },
-          error: (error) => {            this.errorMessage(
+          error: (error) => {
+            this.errorMessage(
               error?.error?.message || 'Erro ao cadastrar associado:'
             );
           },
@@ -111,7 +107,6 @@ export class VotacaoContainerComponent implements OnInit {
   }
 
   handleVotar(voto: string) {
-
     if (this.idUsuario === null) {
       this.isOpenModal = true;
     } else {
