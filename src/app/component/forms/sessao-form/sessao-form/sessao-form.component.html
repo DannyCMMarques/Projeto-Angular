@@ -1,0 +1,48 @@
+<form [formGroup]="formsSessao"  class="space-y-6 text-gray-800">
+  <div class="flex items-center gap-2 mb-4">
+    <span class="material-symbols-outlined text-2xl text-indigo-600"> newspaper </span>
+    <h2 class="text-lg font-medium">
+      {{sessao?.id ? 'Editar Sessão' : 'Nova Sessão'}}
+    </h2>
+  </div>
+
+  <div>
+    <label for="titulo" class="block text-sm font-medium mb-1">
+      Código da Pauta
+
+    </label>
+    <input formControlName="idPauta" id="idPauta" type="text" class="w-full
+    px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2
+    focus:ring-indigo-700" placeholder="Digite o código da pauta" />
+    <div *ngIf="formsSessao.get('idPauta')?.invalid && formsSessao.get('idPauta')?.touched">
+      <p class="text-red-500 text-sm mt-1">O código da pauta é obrigatório</p>
+
+    </div>
+</div>
+<div>
+  <label htmlFor="duracao" class =" text-sm font-semibold mb-1">
+    Duração
+  </label>
+  <div class="flex items-center justify-around gap-3">
+    <input
+      type="number"
+        min="1"
+      formControlName="duracao"
+      id="duracao"
+      class="w-2/3 px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-700 ml-1"
+
+    />
+    <select
+      formControlName="unidade"
+      class="w-1/3 px-3 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-700"
+    >
+      <option value="SEG">Segundos</option>
+      <option value="MIN">Minutos</option>
+      <option value="H">Horas</option>
+    </select>
+  </div>
+  <div *ngIf="formsSessao.get('duracao')?.invalid && formsSessao.get('duracao')?.touched">
+    <p class="text-red-500 text-sm mt-1">A duração é obrigatória</p>
+  </div>
+</div>
+</form>

@@ -1,0 +1,12 @@
+<div class="flex gap-2 flex-wrap">
+  <app-tag-status
+    [cor]="getCor(status)"
+    [texto]="status | capitalizarComEspacos">
+  </app-tag-status>
+
+  <app-tag-status
+    *ngIf="exibirResultado && resultado"
+    [cor]="getCor(resultado)"
+    [texto]="resultado">
+  </app-tag-status>
+</div>
