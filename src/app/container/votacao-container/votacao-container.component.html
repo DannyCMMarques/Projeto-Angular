@@ -1,0 +1,16 @@
+<app-votacao
+  [sessao]="sessaoEncontradaPorId"
+  (voto)="handleVotar($event)"
+></app-votacao>
+
+<app-modal
+  [showModal]="isOpenModal"
+  (close)="isOpenModal = false"
+  [isForms]="true"
+  (submitForm)="handleAssociadoForm($event)"
+>
+  <app-associado-form
+    [mostrarCadastro]="mostrarCadastro"
+    (resetAssociado)="isOpenModal = false"
+  ></app-associado-form>
+</app-modal>

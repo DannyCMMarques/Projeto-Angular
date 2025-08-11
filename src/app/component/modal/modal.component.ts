@@ -30,7 +30,6 @@ export class ModalComponent<T = any> {
   @Output() close = new EventEmitter<void>();
   @Output() submitForm = new EventEmitter();
   @Input() isForms = false;
-  // @ContentChild(PautaFormComponent) pautaFormComponent!: PautaFormComponent;
   @ViewChild('modalContainer', { read: ViewContainerRef })
   public modalContainer: ViewContainerRef | undefined;
   @ContentChild(MODAL_FORM) modalForm?: ModalFormAdapter<T>;
@@ -41,16 +40,20 @@ export class ModalComponent<T = any> {
 
   submit() {
     const formAdapter = this.modalForm;
-    if (!formAdapter?.form) return;
+    if (!formAdapter?.form) {
+      return;
+    }
 
     formAdapter.form.markAllAsTouched?.();
+
+    
     if (formAdapter.form.valid) {
       const value = formAdapter.getValue
         ? formAdapter.getValue()
         : (formAdapter.form as any).getRawValue?.() ?? formAdapter.form.value;
-
       this.submitForm.emit({ formulario: value, id: formAdapter.id });
       this.fechar();
+    } else {
     }
   }
 

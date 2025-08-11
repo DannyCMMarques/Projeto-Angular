@@ -1,24 +1,6 @@
 <div class="sm:px-0 lg:px-8 py-1 min-h-screen">
-  <!-- {isOpenModal && (
-    <Modal onFechar={handleFecharModal} tamanho="md">
-      <FormularioUsuario
-        handleClose={handleFecharModal}
-        onSucesso={() => {
-          handleFecharModal();
-        }}
-      />
-    </Modal>
-  )} -->
   <div class="relative">
-    <div
-      class="absolute inset-0 z-50 flex items-center justify-center backdrop-blur-xs rounded-lg"
-      *ngIf="sessaoEncerrada"
-    >
-      <p class="text-xl font-bold text-red-700">
-        <span class="material-symbols-outlined text-4xl"> lock </span>
-      </p>
-      <p class="text-xl font-bold text-red-700 mr-2">Sessão Encerrada</p>
-    </div>
+    
 
     <app-container cor="bg-transparent">
       <app-cabecalho-sessao [sessao]="sessao"></app-cabecalho-sessao>

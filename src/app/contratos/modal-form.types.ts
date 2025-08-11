@@ -1,4 +1,3 @@
-// modal-form.types.ts
 import { InjectionToken } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 

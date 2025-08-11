@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SessaoIniciadaResponseDTO } from 'src/app/interfaces/interfaceSessao';
 
 @Component({
@@ -8,4 +8,9 @@ import { SessaoIniciadaResponseDTO } from 'src/app/interfaces/interfaceSessao';
 })
 export class CabecalhoSessaoComponent {
   @Input() sessao!: SessaoIniciadaResponseDTO;
+  @Output() expired = new EventEmitter<void>();
+
+  onExpired() {
+    this.expired.emit();
+  }
 }

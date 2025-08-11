@@ -106,7 +106,6 @@ export class PautasContainerComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.pautaEncontradaPorId = response as PautaResultadoDTO;
-          this.successMessage('Pauta encontrada com sucesso!');
         },
         error: (error) => {
           this.errorMessage(
@@ -180,7 +179,6 @@ export class PautasContainerComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.sessaoDaPauta = response.content[0] as SessaoIniciadaResponseDTO;
-          this.successMessage('Sessão encontrada com sucesso!');
         },
         error: (error) => {
           this.errorMessage(

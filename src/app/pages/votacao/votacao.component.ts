@@ -9,14 +9,9 @@ import { SessaoIniciadaResponseDTO } from 'src/app/interfaces/interfaceSessao';
 export class VotacaoComponent {
   @Output() voto = new EventEmitter<string>();
   @Input() sessao!: SessaoIniciadaResponseDTO;
-  @Output() handleSessaoEncerrada = new EventEmitter<boolean>();
-  @Input() sessaoEncerrada!: boolean;
 
   public handleVotar(voto: string) {
     this.voto.emit(voto);
   }
 
-  public handleSessaoEncerradaFn(status: boolean) {
-    this.handleSessaoEncerrada.emit(status);
-  }
 }

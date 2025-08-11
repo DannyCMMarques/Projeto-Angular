@@ -1,4 +1,3 @@
-
 import {
   Component,
   EventEmitter,
@@ -7,10 +6,18 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Subject } from 'rxjs';
-import { MODAL_FORM, ModalFormAdapter } from 'src/app/contratos/modal-form.types';
+import {
+  MODAL_FORM,
+  ModalFormAdapter,
+} from 'src/app/contratos/modal-form.types';
 import { PautaResponseDTO } from 'src/app/interfaces/interfacePauta';
 
 type PautaPayload = { titulo: string; descricao?: string };
@@ -21,10 +28,12 @@ type PautaPayload = { titulo: string; descricao?: string };
   templateUrl: './pauta-form.component.html',
   styleUrls: ['./pauta-form.component.css'],
   providers: [
-    { provide: MODAL_FORM, useExisting: forwardRef(() => PautaFormComponent) }
-  ]
+    { provide: MODAL_FORM, useExisting: forwardRef(() => PautaFormComponent) },
+  ],
 })
-export class PautaFormComponent implements OnInit, ModalFormAdapter<PautaPayload> {
+export class PautaFormComponent
+  implements OnInit, ModalFormAdapter<PautaPayload>
+{
   private _pautaId?: PautaResponseDTO;
 
   formsPauta: FormGroup;
@@ -69,24 +78,22 @@ export class PautaFormComponent implements OnInit, ModalFormAdapter<PautaPayload
     return this._pautaId;
   }
 
-  @Output() resetePauta = new EventEmitter<void>(); // opcional; pode remover se não usar
+  @Output() resetePauta = new EventEmitter<void>();
   public closeSubmit$ = new Subject<boolean>();
 
   constructor(private fb: FormBuilder) {
     this.formsPauta = this.fb.group({
       titulo: ['', Validators.required],
-      descricao: ['', Validators.required], // torne opcional se fizer sentido
+      descricao: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
-    this.closeSubmit$
-      .pipe(untilDestroyed(this))
-      .subscribe(() => {
-        this.formsPauta.reset();
-        this.formsPauta.markAsPristine();
-        this.formsPauta.markAsUntouched();
-        this.resetePauta.emit(); // se quiser notificar o pai
-      });
+    this.closeSubmit$.pipe(untilDestroyed(this)).subscribe(() => {
+      this.formsPauta.reset();
+      this.formsPauta.markAsPristine();
+      this.formsPauta.markAsUntouched();
+      this.resetePauta.emit();
+    });
   }
 }

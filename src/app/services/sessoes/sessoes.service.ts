@@ -43,7 +43,12 @@ export class SessoesService {
     if (params.status) {
       queryParams.set('status', params.status);
     }
-    return this.http.get<{ content: SessaoResponseDTO[], totalElements: number, totalPages: number, last: boolean }>(this.url, { params: queryParams });
+    return this.http.get<{
+      content: SessaoResponseDTO[];
+      totalElements: number;
+      totalPages: number;
+      last: boolean;
+    }>(this.url, { params: queryParams });
   }
 
   atualizarSessao(id: number, sessao: SessaoRequestDTO) {

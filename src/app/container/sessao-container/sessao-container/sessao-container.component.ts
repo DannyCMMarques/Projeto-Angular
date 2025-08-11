@@ -140,7 +140,6 @@ buscarSessaoPorId(id: number): void {
   ).subscribe({
     next: (response) => {
       this.sessaoEncontradaPorId = response as SessaoIniciadaResponseDTO;
-      this.successMessage('Sessão encontrada com sucesso');
     },
     error: (error) => {
       this.errorMessage(error?.error?.message || 'Erro ao buscar sessão por ID:');

@@ -7,6 +7,7 @@ import { BotaoStatusComponent } from './botao-status/botao-status.component';
 import { BotaoVotacaoComponent } from './botao-votacao/botao-votacao.component';
 import { CardsComponent } from './cards/cards.component';
 import { ContainerComponent } from './container/container.component';
+import { AssociadoFormComponent } from './forms/associado-form/associado-form.component';
 import { PautaFormComponent } from './forms/pauta-form/pauta-form.component';
 import { SessaoFormComponent } from './forms/sessao-form/sessao-form/sessao-form.component';
 import { InformacoesResumoComponent } from './informacoes-resumo/informacoes-resumo.component';
@@ -47,8 +48,9 @@ import { VotoItemComponent } from './votacao/voto-item/voto-item.component';
     HistoricoVotosComponent,
     VotoItemComponent,
     CabecalhoSessaoComponent,
+    AssociadoFormComponent,
   ],
-  imports: [CommonModule, NgxSpinnerModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, NgxSpinnerModule, FormsModule, ReactiveFormsModule, ],
   exports: [
     MenuLateralComponent,
     ContainerComponent,
@@ -70,6 +72,7 @@ import { VotoItemComponent } from './votacao/voto-item/voto-item.component';
     EstatisticasVotosComponent,
     HistoricoVotosComponent,
     CabecalhoSessaoComponent,
+    AssociadoFormComponent,
   ],
 })
 export class SharedComponentModule {}

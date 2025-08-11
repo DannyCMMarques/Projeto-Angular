@@ -14,6 +14,7 @@ import { PautasComponent } from './pages/pautas/pautas.component';
 import { SessoesComponent } from './pages/sessoes/sessoes.component';
 import { VotacaoComponent } from './pages/votacao/votacao.component';
 import { ServicesModule } from './services/services.module';
+import { VotacaoContainerComponent } from './container/votacao-container/votacao-container.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ServicesModule } from './services/services.module';
     PautasContainerComponent,
     VotacaoComponent,
     SessaoContainerComponent,
+    VotacaoContainerComponent,
   ],
   imports: [
     BrowserModule,
