@@ -212,7 +212,7 @@ docker-compose up
 ### 2. Front-end
 
 ```bash
-git clone https://github.com/DannyCMMarques/desafio-votacao.git
+git clone https://github.com/DannyCMMarques/Projeto-Angular.git
 cd desafio-votacao
 npm install
 ng serve
